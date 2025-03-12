@@ -38,8 +38,8 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - Ground
+  - Ocean
   - 
   m_SortingLayers:
   - name: Default
