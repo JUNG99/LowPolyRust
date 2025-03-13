@@ -95,7 +95,7 @@ public class Build : MonoBehaviour
             _curPreviewObj = hit.collider.gameObject;
             CreateSnapPos(hit.collider.gameObject);
 
-            if ((LayerMask.GetMask("Ground") & (1 << hit.collider.gameObject.layer)) != 0 && (hit.collider.CompareTag("Floor") || hit.collider.CompareTag("Wall") || hit.collider.CompareTag("Roof")))
+            if ((LayerMask.GetMask("Ground") & (1 << hit.collider.gameObject.layer)) != 0 && (hit.collider.CompareTag("Floor") || hit.collider.CompareTag("Wall")))
             {
                 if (_curPreviewObj != lastHitObj)
                 {
