@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
@@ -16,47 +17,44 @@ public class Planting : MonoBehaviour
     /// </summary>
 
     [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private LayerMask oceanLayer;
-    [SerializeField] private int groundlayerInt;
 
-    [SerializeField] private int chunchMin;
-    [SerializeField] private int chunchMax;
     [SerializeField] private float maxGroundHeight;
-    [SerializeField] private List<GameObject> plantList;
+    [SerializeField] private List<GameObject> plantPrefabList;
 
-    [SerializeField] private MapManager mapManager;
+    [Header("===currData===")]
+    [SerializeField] MapData mapData;
+    [SerializeField] Transform plantingParent;
 
     private void Start()
     {
-        mapManager = GetComponent<MapManager>();
-
+        maxGroundHeight = 60f;
         groundLayer = LayerMask.GetMask("Ground");
-        oceanLayer = LayerMask.GetMask("Ocean");
-        groundlayerInt = LayerMask.NameToLayer("Ground");
-
-        chunchMin = 10;
-        chunchMax = 10;
-        maxGroundHeight = 50f;
     }
 
-    public void PlantingTree(List<Transform> chuck , List<GameObject> plant) 
+    public void PlantingTree(MapData mapdata, Transform parentTrs, Transform[] chuck , List<GameObject> plantPrefab ) 
     {
-        // 청크는 항상 2 ~ 4 개 정도 사이에서 랜덤
-        int ranchunck = Random.Range(2, 4);
 
         // 임시로 담아놓기
-        this.plantList = plant;
+        this.mapData = mapdata;
+        this.plantPrefabList = plantPrefab;
+        this.plantingParent = parentTrs;
 
-        // 랜덤 수 구하기 
-        List<int> suffleChunk = Shuffle(ranchunck, 0 , chuck.Count - 1);
+        // 청크에서 고를 N개
+        int selectChuckCount = mapdata.SelectChunkCount;       
+
+        // 전체 청크에서 N개 고르기 
+        List<int> suffleChunk = Shuffle(selectChuckCount, 0 , chuck.Length - 1);
 
         foreach (int num in suffleChunk) 
         {
             Transform trs = chuck[num];
 
-            // 청크 기준으로 ( x - 5, y - 5 ) ~ ( x + 5 , y + 5) 사이에서 랜덤으로 N개 고르기
-            List<int> selectPlantX = Shuffle(5 , (int)trs.position.x - chunchMin, (int)trs.position.x + chunchMax);
-            List<int> selectPlantZ = Shuffle(5 , (int)trs.position.z - chunchMin, (int)trs.position.z + chunchMax);
+            // 랜덤으로 N개 고르기
+            int plantCount = Random.Range(mapdata.PlantCountMin , mapdata.PlantCountMax + 1);
+
+            // 청크 기준으로(x -size, y - size ) ~(x + size, y + size) 사이의 값 
+            List<int> selectPlantX = Shuffle(plantCount, (int)trs.position.x - mapdata.ChunkSizeMin, (int)trs.position.x + mapdata.ChunkSizeMax);
+            List<int> selectPlantZ = Shuffle(plantCount, (int)trs.position.z - mapdata.ChunkSizeMin, (int)trs.position.z + mapdata.ChunkSizeMax);
 
             for (int i = 0; i < selectPlantX.Count; i++) 
             {
@@ -72,7 +70,6 @@ public class Planting : MonoBehaviour
         RaycastHit hit;
         Ray ray = new Ray(new Vector3(x, 50f, z) , Vector3.down);
 
-        // Instantiate(plantList[0], new Vector3(x, 100f, z) , Quaternion.identity);
 
         // ground 레이어만 검사 
         if (Physics.Raycast(ray, out hit, 100f, groundLayer)) 
@@ -88,11 +85,11 @@ public class Planting : MonoBehaviour
 
     private void PlantTreeOrEct(Vector3 position) 
     {
-        int rand = Random.Range(0, plantList.Count);
+        int rand = Random.Range(0, plantPrefabList.Count);
 
-        GameObject tree = Instantiate( plantList[rand] );
+        GameObject tree = Instantiate( plantPrefabList[rand] );
         tree.transform.position = position;
-        tree.transform.SetParent(mapManager.TreeParent);
+        tree.transform.SetParent(plantingParent);
     }
 
     // min과 max 사이에서 selectNum 갯수만큼 중복없이 랜덤수 리턴

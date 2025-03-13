@@ -15,6 +15,7 @@ public class MapGizmo : MonoBehaviour
     }
 
     public PredefinedColor gizmoColorChoice = PredefinedColor.Green;
+    public Vector3 gizmoSize;
 
     private Color GetColorFromEnum(PredefinedColor colorEnum)
     {
@@ -36,6 +37,6 @@ public class MapGizmo : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = GetColorFromEnum(gizmoColorChoice);
-        Gizmos.DrawWireCube(transform.position, Vector3.one * 20);
+        Gizmos.DrawWireCube(transform.position, gizmoSize);
     }
 }
