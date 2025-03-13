@@ -14,7 +14,7 @@ public class EnemyAI : MonoBehaviour
     public AIState currentState = AIState.WonderMode;
     public bool autoModeSwitch = true;
 
-    // AttackMode에서 사용할 타겟
+    // 적의 타겟
     public Transform target;
 
     // 적의 스텟
@@ -62,15 +62,6 @@ public class EnemyAI : MonoBehaviour
                 {
                     currentState = AIState.WonderMode;
                 }
-                else
-                {
-                    // 타겟이 watchRange 내에 있으나 아직 attackRange에는 없으면 추적 상태로 간주 (AttackMode)
-                    currentState = AIState.AttackMode;
-                }
-            }
-            else
-            {
-                currentState = AIState.WonderMode;
             }
         }
 
@@ -129,23 +120,36 @@ public class EnemyAI : MonoBehaviour
     {
         if (target == null) return false;
 
+        // 타겟 방향 및 각도 계산
         Vector3 directionToTarget = target.position - transform.position;
         float angle = Vector3.Angle(transform.forward, directionToTarget);
 
-        // 타겟이 적의 fieldOfView(시야각) 내에 있으며, watchRange(주시 사거리) 내에 있는지 확인
-        if (angle <= fieldOfView * 0.5f && directionToTarget.magnitude <= watchRange)
+        // 타겟이 적의 시야각(fieldOfView) 내에 있으며, watchRange(주시 사거리) 내에 있는지 확인
+        if (angle <= fieldOfView && directionToTarget.magnitude <= watchRange)
         {
-            RaycastHit hit;
-            // 약간 높인 위치에서 Raycast 실시하여 장애물 여부 확인
+            // watchRange 거리까지의 모든 객체에 대해 Raycast 실시
             Vector3 origin = transform.position + Vector3.up * 0.5f;
-            if (Physics.Raycast(origin, directionToTarget.normalized, out hit, directionToTarget.magnitude))
+            RaycastHit[] hits = Physics.RaycastAll(origin, directionToTarget.normalized, watchRange);
+
+            bool targetFound = false;
+            foreach (RaycastHit hit in hits)
             {
-                if (hit.transform != target)
+                // 타겟이 있는 경우
+                if (hit.transform == target)
                 {
-                    return false;
+                    targetFound = true;
+                    Debug.Log("Target Found");
+                    break;
                 }
             }
-            Debug.Log("Target Visible!");
+
+            // 타겟이 없는 경우
+            if (!targetFound)
+            {
+                Debug.Log("Target Not Found");
+                return false;
+            }
+            
             return true;
         }
         return false;
