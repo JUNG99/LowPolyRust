@@ -30,30 +30,30 @@ public class Build : MonoBehaviour
 
     void CreateSnapPos(GameObject hitObj)
     {
-        Vector3 _center = hitObj.GetComponent<Collider>().bounds.center;
-        Vector3 _size = hitObj.GetComponent<Collider>().bounds.extents;
+        Vector3 center = hitObj.GetComponent<Collider>().bounds.center;
+        Vector3 size = hitObj.GetComponent<Collider>().bounds.extents;
 
         _snapPos = new Vector3[12]
         {
             // 위쪽 (Top)
-            new Vector3(_center.x + _size.x, _center.y + _size.y, _center.z),
-            new Vector3(_center.x - _size.x, _center.y + _size.y, _center.z),
-            new Vector3(_center.x, _center.y + _size.y, _center.z + _size.z),
-            new Vector3(_center.x, _center.y + _size.y, _center.z - _size.z),
+            new Vector3(center.x + size.x, center.y + size.y, center.z),
+            new Vector3(center.x - size.x, center.y + size.y, center.z),
+            new Vector3(center.x, center.y + size.y, center.z + size.z),
+            new Vector3(center.x, center.y + size.y, center.z - size.z),
 
             // 아래쪽 (Bottom)
-            new Vector3(_center.x + _size.x, _center.y - _size.y, _center.z),
-            new Vector3(_center.x - _size.x, _center.y - _size.y, _center.z),
-            new Vector3(_center.x, _center.y - _size.y, _center.z + _size.z),
-            new Vector3(_center.x, _center.y - _size.y, _center.z - _size.z),
+            new Vector3(center.x + size.x, center.y - size.y, center.z),
+            new Vector3(center.x - size.x, center.y - size.y, center.z),
+            new Vector3(center.x, center.y - size.y, center.z + size.z),
+            new Vector3(center.x, center.y - size.y, center.z - size.z),
 
             // 오른쪽 (Right)
-            new Vector3(_center.x + _size.x, _center.y, _center.z + _size.z),
-            new Vector3(_center.x + _size.x, _center.y, _center.z - _size.z),
+            new Vector3(center.x + size.x, center.y, center.z + size.z),
+            new Vector3(center.x + size.x, center.y, center.z - size.z),
 
             // 왼쪽 (Left)
-            new Vector3(_center.x - _size.x, _center.y, _center.z + _size.z),
-            new Vector3(_center.x - _size.x, _center.y, _center.z - _size.z)
+            new Vector3(center.x - size.x, center.y, center.z + size.z),
+            new Vector3(center.x - size.x, center.y, center.z - size.z)
         };
         foreach(var a in _snapPos)
         {
@@ -63,20 +63,27 @@ public class Build : MonoBehaviour
 
     void UpdateScale()
     {
-        if (Input.GetKey(KeyCode.Alpha1))
+        if(_previewObj != null)
         {
-            _scroll = Input.GetAxis("Mouse ScrollWheel");
-            _previewObj.transform.localScale += new Vector3(1, 0, 0) * _scroll;
-        }
-        if (Input.GetKey(KeyCode.Alpha2))
-        {
-            _scroll = Input.GetAxis("Mouse ScrollWheel");
-            _previewObj.transform.localScale += new Vector3(0, 1, 0) * _scroll;
-        }
-        if (Input.GetKey(KeyCode.Alpha3))
-        {
-            _scroll = Input.GetAxis("Mouse ScrollWheel");
-            _previewObj.transform.localScale += new Vector3(0, 0, 1) * _scroll;
+            if (Input.GetKey(KeyCode.Alpha1))
+            {
+                _scroll = Input.GetAxis("Mouse ScrollWheel");
+                _previewObj.transform.localScale += new Vector3(1, 0, 0) * _scroll;
+            }
+            if (Input.GetKey(KeyCode.Alpha2))
+            {
+                _scroll = Input.GetAxis("Mouse ScrollWheel");
+                _previewObj.transform.localScale += new Vector3(0, 1, 0) * _scroll;
+            }
+            if (Input.GetKey(KeyCode.Alpha3))
+            {
+                _scroll = Input.GetAxis("Mouse ScrollWheel");
+                _previewObj.transform.localScale += new Vector3(0, 0, 1) * _scroll;
+            }
+            if (Input.GetKey(KeyCode.Alpha4))
+            {
+                _previewObj.transform.localScale = matter.transform.localScale;
+            }
         }
     }
 
@@ -90,7 +97,7 @@ public class Build : MonoBehaviour
 
             Material mat = _previewObj.GetComponent<Renderer>().material;
 
-            if ((LayerMask.GetMask("Ground") & (1 << hit.collider.gameObject.layer)) != 0 && (hit.collider.CompareTag("Floor") || _previewObj.CompareTag("Wall") || _previewObj.CompareTag("Roof")))
+            if ((LayerMask.GetMask("Ground") & (1 << hit.collider.gameObject.layer)) != 0 && (hit.collider.CompareTag("Floor") || hit.collider.CompareTag("Wall") || hit.collider.CompareTag("Roof")))
             {
                 if (_curPreviewObj != lastHitObj)
                 {
@@ -101,7 +108,7 @@ public class Build : MonoBehaviour
                 float minDistance = float.MaxValue;
                 foreach (var pos in _snapPos)
                 {
-                    float distance = Vector3.Distance(hit.collider.transform.position, pos);
+                    float distance = Vector3.Distance(hit.point, pos);
                     if (distance < minDistance)
                     {
                         minDistance = distance;
@@ -117,38 +124,46 @@ public class Build : MonoBehaviour
             Collider[] colliders = Physics.OverlapBox(buildPos, boundSize, Quaternion.Euler(_previewObj.transform.eulerAngles), ~(LayerMask.GetMask("Ground") | LayerMask.GetMask("Player")));
             if (colliders.Length == 0)
             {
-                if (_previewObj.CompareTag("Floor"))
-                {
-                    _canBuild = true;
-                }
-                else if (hit.collider.tag == _previewObj.tag)
-                {
-                    _canBuild = true;
-                }
-                else if (hit.collider.CompareTag("Floor"))
-                {
-                    _canBuild = _previewObj.CompareTag("Wall");
-                }
-                else if (hit.collider.CompareTag("Wall"))
-                {
-                    _canBuild = _previewObj.CompareTag("Roof");
-                }
-                else
-                    _canBuild = false;
+                _canBuild = CanBuildOn(hit.collider);
             }
             else
                 _canBuild = false;
 
-            _previewObj.transform.position = buildPos;
+            _previewObj.transform.localPosition = buildPos;
             mat.color = _canBuild ? new Color(0, 0, 1, 0.2f) : new Color(1, 0, 0, 0.2f);
         }
+    }
+
+    bool CanBuildOn(Collider hitCollider)
+    {
+        if (_previewObj.CompareTag("Floor"))
+        {
+            return true;  // 바닥은 항상 가능
+        }
+
+        if (hitCollider.CompareTag(_previewObj.tag))
+        {
+            return true;  // 같은 종류끼리는 가능
+        }
+
+        if (hitCollider.CompareTag("Floor") && _previewObj.CompareTag("Wall"))
+        {
+            return true;  // 벽은 바닥에서 가능
+        }
+
+        if (hitCollider.CompareTag("Wall") && _previewObj.CompareTag("Roof"))
+        {
+            return true;  // 지붕은 벽에서 가능
+        }
+
+        return false;  // 그 외의 경우는 불가능
     }
 
     void OnRotatePreviewObj()
     {
         if (Input.GetMouseButtonDown(2))
         {
-            _previewObj.transform.eulerAngles += new Vector3(0, 30, 0);
+            _previewObj.transform.eulerAngles += new Vector3(0, 45, 0);
         }
     }
 
@@ -158,7 +173,7 @@ public class Build : MonoBehaviour
         {
             onBuild = !onBuild;
             _previewObj = Instantiate(matter);
-
+            _previewObj.transform.localScale = matter.transform.localScale;
             Collider col = _previewObj.GetComponent<Collider>();
             if (col != null)
             {
@@ -174,8 +189,8 @@ public class Build : MonoBehaviour
         {
             if (_canBuild)
             {
-                matter.transform.localScale = _previewObj.transform.localScale;
                 GameObject obj = Instantiate(matter, buildPos, Quaternion.Euler(_previewObj.transform.eulerAngles));
+                obj.transform.localScale = _previewObj.transform.localScale;
                 Destroy(_previewObj);
                 onBuild = false;
             }
