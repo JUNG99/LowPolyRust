@@ -1,28 +1,27 @@
-using UnityEngine;
+Ôªøusing UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float walkSpeed = 5f; //¿Ãµø->∞»±‚∑Œ ∫Ø∞Ê
+    public float walkSpeed = 5f;
+    public float sprintSpeed = 10f;
     public float jumpForce = 5f;
+    public float crouchSpeed = 2f;
     public float crouchHeight = 0.5f;
     public float standHeight = 2f;
-    public float sprintSpeed = 10f;
-    public float crouchSpeed = 0.5f; //æ…æ“¿ª ∂ß º”µµ
 
     private Rigidbody rb;
-    private float originalHeight;
+    private float moveSpeed;
     private bool isCrouching = false;
-    private float moveSpeed; //¿Ãµø
 
-    public Transform playerCamera;
+    public Transform cameraHolder;  // üî• MainCameraÎ•º Ïó¨Í∏∞ Ïó∞Í≤∞
     private float mouseSensitivity = 2f;
     private float xRotation = 0f;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        originalHeight = transform.localScale.y; // ±‚∫ª ≥Ù¿Ã∏¶ ¿˙¿Â
-        Cursor.lockState = CursorLockMode.Locked; // ∏∂øÏΩ∫∏¶ ¿·±›
+        Cursor.lockState = CursorLockMode.Locked; // ÎßàÏö∞Ïä§ Ïû†Í∏à
+        moveSpeed = walkSpeed; // Í∏∞Î≥∏ Ïù¥Îèô ÏÜçÎèÑ ÏÑ§Ï†ï
     }
 
     void Update()
@@ -40,12 +39,11 @@ public class PlayerController : MonoBehaviour
 
         Vector3 moveDirection = transform.right * horizontal + transform.forward * vertical;
 
-        if(Input.GetKey(KeyCode.LeftShift) && !isCrouching)
+        if (Input.GetKey(KeyCode.LeftShift) && !isCrouching)
         {
             moveSpeed = sprintSpeed;
         }
-
-        else if(isCrouching)
+        else if (isCrouching)
         {
             moveSpeed = crouchSpeed;
         }
@@ -55,11 +53,6 @@ public class PlayerController : MonoBehaviour
         }
 
         rb.MovePosition(transform.position + moveDirection.normalized * moveSpeed * Time.deltaTime);
-
-
-
-
-
     }
 
     void Jump()
@@ -89,16 +82,16 @@ public class PlayerController : MonoBehaviour
     {
         isCrouching = true;
         transform.localScale = new Vector3(transform.localScale.x, crouchHeight, transform.localScale.z);
-        playerCamera.localPosition = new Vector3(playerCamera.localPosition.x, crouchHeight, playerCamera.localPosition.z);
-        Debug.Log("æ…±‚øœ∑·");
+        cameraHolder.localPosition = new Vector3(cameraHolder.localPosition.x, crouchHeight, cameraHolder.localPosition.z);
+        Debug.Log("ÏïâÍ∏∞ ÏôÑÎ£å");
     }
 
     void StandUp()
     {
         isCrouching = false;
         transform.localScale = new Vector3(transform.localScale.x, standHeight, transform.localScale.z);
-        playerCamera.localPosition = new Vector3(playerCamera.localPosition.x, standHeight, playerCamera.localPosition.z);
-        
+        cameraHolder.localPosition = new Vector3(cameraHolder.localPosition.x, standHeight, cameraHolder.localPosition.z);
+        Debug.Log("ÏÑúÍ∏∞ ÏôÑÎ£å");
     }
 
     void LookAround()
@@ -109,7 +102,7 @@ public class PlayerController : MonoBehaviour
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
-        playerCamera.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        cameraHolder.localRotation = Quaternion.Euler(xRotation, 0f, 0f); //MainCamera ÌöåÏ†Ñ
         transform.Rotate(Vector3.up * mouseX);
     }
 }
