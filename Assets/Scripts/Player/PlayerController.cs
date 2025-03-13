@@ -2,14 +2,17 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 5f;
+    public float walkSpeed = 5f; //이동->걷기로 변경
     public float jumpForce = 5f;
     public float crouchHeight = 0.5f;
     public float standHeight = 2f;
+    public float sprintSpeed = 10f;
+    public float crouchSpeed = 0.5f; //앉았을 때 속도
 
     private Rigidbody rb;
     private float originalHeight;
     private bool isCrouching = false;
+    private float moveSpeed; //이동
 
     public Transform playerCamera;
     private float mouseSensitivity = 2f;
@@ -36,7 +39,27 @@ public class PlayerController : MonoBehaviour
         float vertical = Input.GetAxis("Vertical");
 
         Vector3 moveDirection = transform.right * horizontal + transform.forward * vertical;
-        rb.MovePosition(transform.position + moveDirection * moveSpeed * Time.deltaTime);
+
+        if(Input.GetKey(KeyCode.LeftShift) && !isCrouching)
+        {
+            moveSpeed = sprintSpeed;
+        }
+
+        else if(isCrouching)
+        {
+            moveSpeed = crouchSpeed;
+        }
+        else
+        {
+            moveSpeed = walkSpeed;
+        }
+
+        rb.MovePosition(transform.position + moveDirection.normalized * moveSpeed * Time.deltaTime);
+
+
+
+
+
     }
 
     void Jump()
@@ -75,6 +98,7 @@ public class PlayerController : MonoBehaviour
         isCrouching = false;
         transform.localScale = new Vector3(transform.localScale.x, standHeight, transform.localScale.z);
         playerCamera.localPosition = new Vector3(playerCamera.localPosition.x, standHeight, playerCamera.localPosition.z);
+        
     }
 
     void LookAround()
