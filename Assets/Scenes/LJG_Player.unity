@@ -2713,8 +2713,9 @@ GameObject:
   - component: {fileID: 423093367}
   - component: {fileID: 423093366}
   - component: {fileID: 423093365}
-  - component: {fileID: 423093369}
   - component: {fileID: 423093370}
+  - component: {fileID: 423093369}
+  - component: {fileID: 423093371}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2828,7 +2829,7 @@ MonoBehaviour:
   jumpForce: 5
   crouchSpeed: 0.5
   crouchHeight: 0.5
-  standHeight: 2
+  standHeight: 1
   cameraHolder: {fileID: 920713974}
 --- !u!54 &423093370
 Rigidbody:
@@ -2857,6 +2858,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &423093371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 423093364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a52a6381b6ca80499b2a32405cae454, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionRange: 2
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &427580877
 PrefabInstance:
   m_ObjectHideFlags: 0

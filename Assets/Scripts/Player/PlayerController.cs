@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     public float jumpForce = 5f;
     public float crouchSpeed = 2f;
     public float crouchHeight = 0.5f;
-    public float standHeight = 2f;
+    public float standHeight = 1f;
 
     private Rigidbody rb;
     private float moveSpeed;
