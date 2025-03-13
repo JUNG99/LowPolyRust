@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - resources
+  - food
   layers:
   - Default
   - TransparentFX
@@ -33,7 +35,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Item
   - Ground
   - Ocean
   - 

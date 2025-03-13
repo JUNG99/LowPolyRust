@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ed8b208ca169a1498ac4c7920fcd65f, type: 3}
+  m_Name: Item_Log
+  m_EditorClassIdentifier: 
+  displayName: "\uD1B5\uB098\uBB34 (Log)"
+  description: "\uBCA0\uC5B4\uB0B8 \uB098\uBB34"
+  type: 2
+  icon: {fileID: 21300000, guid: e232efa096f10134a91bdf0ff689e302, type: 3}
+  dropPrefab: {fileID: 2715150415402880992, guid: 6537647a9be79734590e075566926caf, type: 3}
+  canStack: 1
+  maxStackAmount: 16
+  consumables: []
