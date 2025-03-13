@@ -3,16 +3,26 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
-    // AI 동작 모드를 정의하는 이넘
+    // 적 AI 상태 정의
     public enum AIState
     {
-        WonderMode,  // 랜덤 이동
+        WonderMode,  // 탐색
         AttackMode   // 특정 타겟 추적 및 공격
     }
+    
+    // 적 행동 상태 정의
+    public enum ActionState
+    {
+        Idle,   // 정지
+        Move,   // 이동
+        Attack  // 공격
+    }
 
-    // 기본 AI 상태 (인스펙터에서 제어 가능하지만, 자동 모드 전환도 수행)
+    // 기본 AI 상태 모드 (인스펙터에서 제어 가능하지만, 자동 모드 전환도 수행)
     public AIState currentState = AIState.WonderMode;
     public bool autoModeSwitch = true;
+    
+    private ActionState currentAction = ActionState.Idle;
 
     // 적의 타겟
     public Transform target;
@@ -31,11 +41,15 @@ public class EnemyAI : MonoBehaviour
     public float wanderTimer = 5f;
     private float wanderTimerCounter;
 
+    // 참조
     private NavMeshAgent agent;
+    private Animator animator;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
+        
         agent.speed = moveSpeed; // 기본 이동 속도 설정
         wanderTimerCounter = wanderTimer;
 
@@ -76,6 +90,8 @@ public class EnemyAI : MonoBehaviour
             WanderUpdate();
             Debug.Log("Wandering");
         }
+        
+        UpdateAnimation();
     }
 
     // 랜덤 이동 동작 처리 (WonderMode)
@@ -108,11 +124,15 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    // 공격 로직 (예시: 공격 애니메이션 및 데미지 적용 등)
+    // 공격 로직
     void Attack()
     {
-        Debug.Log("Enemy Attacks! Target takes damage.");
-        // 실제로 타겟의 HP를 감소시키는 로직을 추가할 수 있습니다.
+        if (target != null)
+        {
+            Debug.Log("Enemy Attacks! Target takes damage.");
+            animator.SetTrigger("Attack");
+        }
+        // >> 타겟의 HP를 감소시키는 로직을 추가 <<
     }
 
     // 타겟의 존재를 확인하는 함수
@@ -170,6 +190,31 @@ public class EnemyAI : MonoBehaviour
         NavMeshHit navHit;
         NavMesh.SamplePosition(randDirection, out navHit, dist, layermask);
         return navHit.position;
+    }
+    
+    void UpdateAnimation()
+    {
+        if (animator == null)
+            return;
+
+        // 모든 행동 애니메이션 상태를 초기화
+        // animator.SetBool("Idle", false);
+        // animator.SetBool("Move", false);
+        animator.SetTrigger("Attack");
+
+        // 현재 행동 상태에 따른 애니메이션 활성화
+        switch (currentAction)
+        {
+            // case ActionState.Idle:
+            //     animator.SetBool("Idle", true);
+            //     break;
+            // case ActionState.Move:
+            //     animator.SetBool("Move", true);
+            //     break;
+            case ActionState.Attack:
+                animator.SetTrigger("Attack");
+                break;
+        }
     }
     
     // 적의 사거리 시각화
