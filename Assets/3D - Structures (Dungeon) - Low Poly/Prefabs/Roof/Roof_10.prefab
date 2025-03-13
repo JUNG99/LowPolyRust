@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3203760912736789970}
   - component: {fileID: 4409998193065977178}
   - component: {fileID: 5906829227883704763}
-  m_Layer: 0
+  m_Layer: 29
   m_Name: Roof_10
   m_TagString: Untagged
   m_Icon: {fileID: 0}

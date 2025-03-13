@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4901369125031801694}
   - component: {fileID: 6072524316335224356}
   - component: {fileID: 4663290425646432804}
-  m_Layer: 0
+  m_Layer: 29
   m_Name: GateCyllinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}

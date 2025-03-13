@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8170969922389166595}
   - component: {fileID: 4439810514264140481}
   - component: {fileID: 7282456176307211709}
-  m_Layer: 0
+  m_Layer: 29
   m_Name: DoorTextured
   m_TagString: Untagged
   m_Icon: {fileID: 0}

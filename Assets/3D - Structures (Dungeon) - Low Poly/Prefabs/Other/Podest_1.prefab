@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 817810760255728633}
   - component: {fileID: 8532794824147451349}
   - component: {fileID: 5950495430553274009}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: Podest_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

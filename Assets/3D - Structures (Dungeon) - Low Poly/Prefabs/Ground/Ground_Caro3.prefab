@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 4570750165230478894}
   - component: {fileID: 268016334123026481}
   - component: {fileID: 6830515270220644115}
-  m_Layer: 0
+  m_Layer: 29
   m_Name: Ground_Caro3
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

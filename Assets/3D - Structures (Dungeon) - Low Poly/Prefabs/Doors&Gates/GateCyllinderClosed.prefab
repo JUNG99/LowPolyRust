@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8852265304205888656}
   - component: {fileID: 1249887938573107218}
   - component: {fileID: 963468713556025607}
-  m_Layer: 0
+  m_Layer: 29
   m_Name: GateCyllinderClosed
   m_TagString: Untagged
   m_Icon: {fileID: 0}

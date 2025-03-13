@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 892399961255121327}
   - component: {fileID: 5629199917764227726}
   - component: {fileID: 291435182445144454}
-  m_Layer: 0
+  m_Layer: 29
   m_Name: DoorStraight
   m_TagString: Untagged
   m_Icon: {fileID: 0}

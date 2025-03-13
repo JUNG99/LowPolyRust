@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 7922995556430835127}
   - component: {fileID: 4392253163254369307}
   - component: {fileID: 6626997860039782125}
-  m_Layer: 0
+  m_Layer: 29
   m_Name: Ground_Simple3
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

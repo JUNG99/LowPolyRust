@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2747515689133127588}
   - component: {fileID: 7246282694047237052}
   - component: {fileID: 8009299885451382552}
-  m_Layer: 0
+  m_Layer: 29
   m_Name: Wall_Doublesided_7
   m_TagString: Untagged
   m_Icon: {fileID: 0}

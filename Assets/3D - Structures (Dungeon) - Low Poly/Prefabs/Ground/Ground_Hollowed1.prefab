@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 4989906749397615314}
   - component: {fileID: 902178874941212047}
   - component: {fileID: 2058889871439256063}
-  m_Layer: 0
+  m_Layer: 29
   m_Name: Ground_Hollowed1
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

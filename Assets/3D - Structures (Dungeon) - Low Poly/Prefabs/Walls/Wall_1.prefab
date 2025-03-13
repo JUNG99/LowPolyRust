@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2204163482575574653}
   - component: {fileID: 515593502862468890}
   - component: {fileID: -4980369293265323407}
-  m_Layer: 0
+  m_Layer: 29
   m_Name: Wall_1
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.19999993, y: 0.9, z: 6.3999963}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
