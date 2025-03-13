@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9ed8b208ca169a1498ac4c7920fcd65f, type: 3}
-  m_Name: Item_OverCookedMeat
+  m_Name: Item_CopperIngot
   m_EditorClassIdentifier: 
-  displayName: "\uD0C0\uBC84\uB9B0 \uACE0\uAE30 (Burnt meat)"
-  description: "\uD0C0\uBC84\uB838\uB2E4"
+  displayName: "\uAD6C\uB9AC \uC8FC\uAD34 (CopperIngot)"
+  description: "\uAC00\uACF5\uB41C \uAD6C\uB9AC"
   type: 2
-  icon: {fileID: 21300000, guid: a5045815a9ebe05499d51a42b4bcedf8, type: 3}
+  icon: {fileID: 21300000, guid: e1b9181489040fa47b44cfa9e4d38928, type: 3}
   dropPrefab: {fileID: 5349866722174828490, guid: e847b0ed7e42e454e81d6633aaaeb25b, type: 3}
   canStack: 1
   maxStackAmount: 16
