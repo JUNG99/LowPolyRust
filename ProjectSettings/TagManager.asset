@@ -4,10 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Ground
-  - Floor
-  - Wall
-  - Roof
+  - resources
+  - food
   layers:
   - Default
   - TransparentFX
@@ -34,10 +32,10 @@ TagManager:
   - 
   - 
   - 
-  - Player
   - 
   - 
   - 
+  - Item
   - Ground
   - Ocean
   - 
