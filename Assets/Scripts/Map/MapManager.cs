@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum PlantType
+{
+    Tree,
+    Rock,
+    Grass
+}
+
 public class MapManager : MonoBehaviour
 {
     [SerializeField] private Planting planting;

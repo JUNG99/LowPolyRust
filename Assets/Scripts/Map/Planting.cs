@@ -42,13 +42,13 @@ public class Planting : MonoBehaviour
     public void PlantingTree(List<Transform> chuck , List<GameObject> plant) 
     {
         // 청크는 항상 2 ~ 4 개 정도 사이에서 랜덤
-        int ranchunck = Random.Range(2, chuck.Count);
+        int ranchunck = Random.Range(2, 4);
 
         // 임시로 담아놓기
         this.plantList = plant;
 
         // 랜덤 수 구하기 
-        List<int> suffleChunk = Shuffle(2, 0 , chuck.Count - 1);
+        List<int> suffleChunk = Shuffle(ranchunck, 0 , chuck.Count - 1);
 
         foreach (int num in suffleChunk) 
         {
