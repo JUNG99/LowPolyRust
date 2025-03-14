@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -13,6 +14,7 @@ public enum PlantType
 public class MapManager : MonoBehaviour
 {
     [SerializeField] private Planting planting;
+    [SerializeField] private MapWeather mapWeather;
 
     [Header("=== Parent ===")]
     [SerializeField] private Transform treeParent;
@@ -36,18 +38,43 @@ public class MapManager : MonoBehaviour
     [SerializeField] List<MapData> mapData;
     // PlantType 순서대로 들어가야함 
 
+    [Header("===State===")]
+    [SerializeField] private float weatherRotaTime;
+
     public Transform TreeParent { get => treeParent;}
 
     void Start()
     {
         planting = GetComponent<Planting>();
+        mapWeather = GetComponent<MapWeather>();
 
         InitTrsnform();
         InitGeneratePlant();
 
+        // 나무 , 풀, 돌 심기
         StartCoroutine(TreePlant());
         StartCoroutine(RockPlant());
         StartCoroutine(GrassPlant());
+
+        weatherRotaTime = 10f;
+        // 날씨 로테이션
+        StartCoroutine(WeatherRotation());
+    }
+
+    IEnumerator WeatherRotation() 
+    {
+        yield return new WaitForSeconds(1f);
+
+        // N초마다 날씨 로테이션 
+        while (true) 
+        {
+            for (int i = 0; i < Enum.GetValues(typeof(WeatherType)).Length; i++) 
+            {
+                mapWeather.ChangeWeather((WeatherType)i);
+
+                yield return new WaitForSeconds(weatherRotaTime);
+            }
+        }
     }
 
     private void InitTrsnform() 

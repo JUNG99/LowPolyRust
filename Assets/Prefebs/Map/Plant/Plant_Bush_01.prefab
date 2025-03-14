@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2494295930420900587}
   - component: {fileID: 5606614725305540602}
-  m_Layer: 0
+  m_Layer: 27
   m_Name: Plant_Bush_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68,7 +68,7 @@ GameObject:
   - component: {fileID: 1035216850018218954}
   - component: {fileID: 8074021365094561198}
   - component: {fileID: 3457915978616689045}
-  m_Layer: 0
+  m_Layer: 27
   m_Name: Bush_01_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -152,7 +152,8 @@ GameObject:
   - component: {fileID: 6382524463922605871}
   - component: {fileID: 5716053830692949547}
   - component: {fileID: 5577213197616841422}
-  m_Layer: 0
+  - component: {fileID: 7045059332703488194}
+  m_Layer: 27
   m_Name: Bush_01_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -245,3 +246,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.6, y: 0.7, z: 0.6}
   m_Center: {x: 0, y: 0.38929102, z: 0}
+--- !u!114 &7045059332703488194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8699783676493878591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec9b7fafd12121243878142f85ad64bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  naturalObjectData: {fileID: 11400000, guid: df8a8a07c32fa1e418038e295c2b36b6, type: 2}
