@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: BigRockData
   m_EditorClassIdentifier: 
   plantType: 1
-  Durability: 5
+  natureName: "\uD070 \uB3CC"
+  natureToolTip: "\uB3CC\uC744 \uB2E4\uC218 \uD68D\uB4DD\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
+  durability: 5

@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: SmallTreeData
   m_EditorClassIdentifier: 
   plantType: 0
-  Durability: 1
+  natureName: "\uC791\uC740 \uB098\uBB34"
+  natureToolTip: "\uB098\uBB34\uB97C \uC18C\uB7C9 \uD68D\uB4DD\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
+  durability: 1

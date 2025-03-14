@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: GrassData
   m_EditorClassIdentifier: 
   plantType: 2
-  Durability: 1
+  natureName: "\uD480"
+  natureToolTip: "\uD480\uC744 \uD68D\uB4DD\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
+  durability: 1

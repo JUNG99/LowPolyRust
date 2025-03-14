@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: SmallRockData
   m_EditorClassIdentifier: 
   plantType: 1
-  Durability: 2
+  natureName: "\uC791\uC740 \uB3CC"
+  natureToolTip: "\uB3CC\uC744 \uC18C\uB7C9 \uD68D\uB4DD\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
+  durability: 2
