@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -15,18 +14,12 @@ public class PlayerStats : MonoBehaviour
     public float thirstDecreaseRate = 1.5f;
     public float hpDecreaseRate = 5f;
 
-    //UI 요소 추가
-    public Slider hpBar;
-    public Slider hungerBar;
-    public Slider thirstBar;
-
     private void Start()
     {
         currentHP = maxHP;
         currentHunger = maxHunger;
         currentThirst = maxThirst;
 
-        //UI초기화
         UpdateUI();
 
         InvokeRepeating(nameof(DecreaseStatsOverTime), 1f, 1f);
@@ -54,10 +47,10 @@ public class PlayerStats : MonoBehaviour
         UpdateUI();
     }
 
-    void UpdateUI()
+    private void UpdateUI()
     {
-        if (hpBar) hpBar.value = currentHP;
-        if (hungerBar) hungerBar.value = currentHunger;
-        if (thirstBar) thirstBar.value = currentThirst;
+        UIManager.Instance.UpdateHP(currentHP, maxHP);
+        UIManager.Instance.UpdateHunger(currentHunger, maxHunger);
+        UIManager.Instance.UpdateThirst(currentThirst, maxThirst);
     }
 }
