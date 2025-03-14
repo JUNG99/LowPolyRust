@@ -14,7 +14,7 @@ AnimatorStateMachine:
     m_Position: {x: 320, y: 80, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1878566488452522076}
-    m_Position: {x: 350, y: 170, z: 0}
+    m_Position: {x: 320, y: 170, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -49,7 +49,7 @@ BlendTree:
     m_CycleOffset: 0
     m_DirectBlendParameter: State
     m_Mirror: 0
-  m_BlendParameter: State
+  m_BlendParameter: WalkScale
   m_BlendParameterY: State
   m_MinThreshold: 0
   m_MaxThreshold: 1
@@ -80,7 +80,7 @@ BlendTree:
     m_CycleOffset: 0
     m_DirectBlendParameter: State
     m_Mirror: 0
-  m_BlendParameter: Vert
+  m_BlendParameter: Move
   m_BlendParameterY: State
   m_MinThreshold: 0
   m_MaxThreshold: 1
@@ -96,24 +96,24 @@ AnimatorController:
   m_Name: Horse
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: State
+  - m_Name: WalkScale
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
-  - m_Name: Vert
+    m_Controller: {fileID: 9100000}
+  - m_Name: Move
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Attack
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_DefaultBool: 1
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer

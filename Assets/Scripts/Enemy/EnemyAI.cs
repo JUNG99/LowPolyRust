@@ -31,7 +31,7 @@ public class EnemyAI : MonoBehaviour
     public float health = 100f;
     public float moveSpeed = 3.5f;
     public float runSpeed = 7f;
-    public float hunger = 0f;
+    public float hunger = 100f;
     public float fieldOfView = 120f; // 시야각 (도 단위)
     public float attackRange = 1f;  // 공격 사거리
     public float watchRange = 10f;  // 주시 사거리 (외부 반경)
@@ -62,6 +62,8 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
+        UpdateAnimation();
+        
         // 자동 모드 전환 (toggle enabled via autoModeSwitch / false일 경우, currentState는 인스펙터에서 설정된 값으로 유지됨)
         if (autoModeSwitch)
         {
@@ -194,26 +196,20 @@ public class EnemyAI : MonoBehaviour
     
     void UpdateAnimation()
     {
-        if (animator == null)
+        if (animator == null || agent == null)
             return;
-
-        // 모든 행동 애니메이션 상태를 초기화
-        // animator.SetBool("Idle", false);
-        // animator.SetBool("Move", false);
-        animator.SetTrigger("Attack");
-
-        // 현재 행동 상태에 따른 애니메이션 활성화
-        switch (currentAction)
+    
+        // NavMeshAgent의 속도를 이용해 현재 이동 중인지 확인
+        float currentSpeed = agent.velocity.magnitude;
+    
+        // 이동 속도가 약간이라도 있다면(예: 0.1f 이상이면) 걷는 모션, 그렇지 않으면 Idle 모션
+        if (currentSpeed > 0.1f)
         {
-            // case ActionState.Idle:
-            //     animator.SetBool("Idle", true);
-            //     break;
-            // case ActionState.Move:
-            //     animator.SetBool("Move", true);
-            //     break;
-            case ActionState.Attack:
-                animator.SetTrigger("Attack");
-                break;
+            animator.SetInteger("Move", 1);
+        }
+        else
+        {
+            animator.SetInteger("Move", 0);
         }
     }
     
