@@ -9,13 +9,14 @@ public class Build : MonoBehaviour
     private GameObject _previewObj;
 
     private Vector3[] _snapPos;
-    private Vector3 buildPos;
-    private Vector3 boundSize;
-    [SerializeField] private float gridSize;
+    private Vector3 _buildPos;
+    private Collider _collider;
+    private bool _isChangeObj = false;
+    [SerializeField] private float _gridSize;
 
     public bool onBuild = false;
     public bool onCollision; // 부딫치고 있는지 확인
-    private bool buildCondition; // 파츠 조건
+    public bool buildCondition; // 파츠 조건
 
     private float _scroll;
 
@@ -40,24 +41,29 @@ public class Build : MonoBehaviour
             {
                 _scroll = Input.GetAxis("Mouse ScrollWheel");
                 _previewObj.transform.localScale += new Vector3(1, 0, 0) * _scroll;
-                boundSize += new Vector3(1, 0, 0) * _scroll*2;
+                _isChangeObj = true;
             }
             if (Input.GetKey(KeyCode.Alpha2))
             {
                 _scroll = Input.GetAxis("Mouse ScrollWheel");
                 _previewObj.transform.localScale += new Vector3(0, 1, 0) * _scroll;
-                boundSize += new Vector3(0, 1, 0) * _scroll*2;
+                _isChangeObj = true;
             }
             if (Input.GetKey(KeyCode.Alpha3))
             {
                 _scroll = Input.GetAxis("Mouse ScrollWheel");
                 _previewObj.transform.localScale += new Vector3(0, 0, 1) * _scroll;
-                boundSize += new Vector3(0, 0, 1) * _scroll*2;
+                _isChangeObj = true;
             }
             if (Input.GetKey(KeyCode.Alpha4))
             {
                 _previewObj.transform.localScale = matter.transform.localScale;
-                boundSize = matter.transform.localScale;
+                _isChangeObj = true;
+            }
+            if(Input.GetMouseButtonDown(2))
+            {
+                _previewObj.transform.rotation *= Quaternion.Euler(0, 45, 0);
+                _isChangeObj = true;
             }
         }
     }
@@ -91,12 +97,12 @@ public class Build : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, 15f, LayerMask.GetMask("Ground","Build")))
         {
             _curPreviewObj = hit.collider.gameObject;
-            CreateSnapPos(hit.collider.gameObject);
 
             if ((LayerMask.GetMask("Build") & (1 << hit.collider.gameObject.layer)) != 0 && (hit.collider.CompareTag("Floor") || hit.collider.CompareTag("Wall")))
             {
-                if (_curPreviewObj != lastHitObj)
+                if (_curPreviewObj != lastHitObj || _isChangeObj)
                 {
+                    _isChangeObj = false;
                     CreateSnapPos(hit.collider.gameObject);
                     lastHitObj = _curPreviewObj;
                 }
@@ -108,36 +114,37 @@ public class Build : MonoBehaviour
                     if (distance < minDistance)
                     {
                         minDistance = distance;
-                        buildPos = pos;
+                        _buildPos = pos;
                     }
                 }
-                Vector3 distancePreview = (buildPos - hit.collider.transform.position).normalized;
+                
                 if (_previewObj.CompareTag("Floor"))
                 {
-                    if (!Mathf.Approximately(distancePreview.y, 0))
-                    {
-                        buildPos += new Vector3(0, distancePreview.y * boundSize.y * 0.5f, 0);
-                    } 
+                    Vector3 distancePreview = (_buildPos - hit.collider.transform.position).normalized;
+
                     if (!Mathf.Approximately(distancePreview.x, 0))
                     {
-                        buildPos += new Vector3(distancePreview.x * boundSize.x * 0.5f, 0, 0);
+                        _buildPos += new Vector3(distancePreview.x * _collider.bounds.size.x * 0.5f, 0, 0);
                     }
-
+                    if (!Mathf.Approximately(distancePreview.y, 0))
+                    {
+                        _buildPos += new Vector3(0, distancePreview.y * _collider.bounds.size.y * 0.5f, 0);
+                    } 
                     if (!Mathf.Approximately(distancePreview.z, 0))
                     {
-                        buildPos += new Vector3(0, 0, distancePreview.z * boundSize.z * 0.5f);
+                        _buildPos += new Vector3(0, 0, distancePreview.z * _collider.bounds.size.z * 0.5f);
                     }
                 }
             }
             else
             {
-                buildPos = new Vector3(Mathf.Round(hit.point.x / gridSize) * gridSize, Mathf.Round(hit.point.y / gridSize) * gridSize, Mathf.Round(hit.point.z / gridSize) * gridSize);
+                _buildPos = new Vector3(Mathf.Round(hit.point.x / _gridSize) * _gridSize, Mathf.Round(hit.point.y / _gridSize) * _gridSize, Mathf.Round(hit.point.z / _gridSize) * _gridSize);
             }
 
             buildCondition = BuildCondition(hit.collider);
 
         }
-        _previewObj.transform.position = buildPos;
+        _previewObj.transform.position = _buildPos;
         matterMaterial.color = onCollision && buildCondition ? new Color(0, 0, 1, 0.2f) : new Color(1, 0, 0, 0.2f);
     }
 
@@ -174,11 +181,10 @@ public class Build : MonoBehaviour
             _previewObj.AddComponent<PreviewCollisionCheck>();
             _previewObj.layer = LayerMask.NameToLayer("Preview");
             matterMaterial = _previewObj.GetComponent<Renderer>().material;
-            Collider col = _previewObj.GetComponent<Collider>();
-            if (col != null)
+            _collider = _previewObj.GetComponent<Collider>();
+            if (_collider != null)
             {
-                col.isTrigger = true;
-                boundSize = col.bounds.size;
+                _collider.isTrigger = true;
             }
         }
     }
@@ -188,7 +194,7 @@ public class Build : MonoBehaviour
         {
             if (onCollision)
             {
-                GameObject obj = Instantiate(matter, buildPos, Quaternion.Euler(_previewObj.transform.eulerAngles));
+                GameObject obj = Instantiate(matter, _buildPos, Quaternion.Euler(_previewObj.transform.eulerAngles));
                 obj.transform.localScale = _previewObj.transform.localScale;
             }
             Destroy(_previewObj);
