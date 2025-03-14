@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 6024052441528939840}
   - component: {fileID: 7290325834143322950}
   - component: {fileID: 8551942189262873532}
-  m_Layer: 0
+  - component: {fileID: 7056196415476121100}
+  m_Layer: 27
   m_Name: Grass_01_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,6 +106,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.2, y: 0.3790605, z: 0.2}
   m_Center: {x: 0, y: 0.18182376, z: 0}
+--- !u!114 &7056196415476121100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4906851553436095455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec9b7fafd12121243878142f85ad64bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  naturalObjectData: {fileID: 11400000, guid: df8a8a07c32fa1e418038e295c2b36b6, type: 2}
 --- !u!1 &6236539873170107843
 GameObject:
   m_ObjectHideFlags: 0
@@ -115,7 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8798444318727910708}
   - component: {fileID: 5977501103732413757}
-  m_Layer: 0
+  m_Layer: 27
   m_Name: Plant_Grass_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,7 +187,7 @@ GameObject:
   - component: {fileID: 4385564813558701714}
   - component: {fileID: 4805151293298892065}
   - component: {fileID: 2354299459483436715}
-  m_Layer: 0
+  m_Layer: 27
   m_Name: Grass_01_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
