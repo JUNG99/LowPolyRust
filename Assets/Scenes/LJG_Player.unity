@@ -2937,6 +2937,7 @@ GameObject:
   - component: {fileID: 423093369}
   - component: {fileID: 423093371}
   - component: {fileID: 423093372}
+  - component: {fileID: 423093373}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -3113,6 +3114,23 @@ MonoBehaviour:
   hungerDecreaseRate: 1
   thirstDecreaseRate: 1.5
   hpDecreaseRate: 5
+--- !u!114 &423093373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 423093364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eca95431f22623a4c92fd47179344ee4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackRange: 2
+  attackDamage: 10
+  interactableLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &427580877
 PrefabInstance:
   m_ObjectHideFlags: 0
