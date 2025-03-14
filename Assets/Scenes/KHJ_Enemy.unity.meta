@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scenes/KHJ_Enemy.unity.meta
 guid: 84a68ac33186f4d04be5f236d4ae7a16
+========
+guid: a07b455daaae0b643a08707299ddb5ae
+>>>>>>>> dev:Assets/Scenes/OWT_resources.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
