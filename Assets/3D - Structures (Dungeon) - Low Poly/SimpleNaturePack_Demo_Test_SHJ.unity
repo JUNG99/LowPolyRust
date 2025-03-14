@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 127502286}
   - component: {fileID: 127502285}
   - component: {fileID: 127502287}
-  m_Layer: 25
+  m_Layer: 20
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -207,7 +207,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &127502287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,7 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd80f04d2de4314183da1c107c958d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 5
+  walkSpeed: 20
   sprintSpeed: 10
   jumpForce: 5
   crouchSpeed: 2
@@ -497,7 +497,7 @@ GameObject:
   - component: {fileID: 1136385242}
   - component: {fileID: 1136385241}
   - component: {fileID: 1136385244}
-  m_Layer: 25
+  m_Layer: 20
   m_Name: Camera1
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -590,7 +590,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48a189d01266bc241999ef6909c3b897, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  matter: {fileID: 5743507171032473749, guid: 11ccea05ddad9504eaee550c2bee55f6, type: 3}
+  matter: {fileID: 5743507171032473749, guid: 6e936bb8ac208324f9e75d4498004e24, type: 3}
   gridSize: 0.1
   onBuild: 0
   canBuild: 0
@@ -603,7 +603,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1182699438}
-  m_Layer: 25
+  m_Layer: 20
   m_Name: Contain
   m_TagString: Untagged
   m_Icon: {fileID: 0}

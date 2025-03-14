@@ -11,18 +11,28 @@ public class PreviewCollisionCheck : MonoBehaviour
         build = FindObjectOfType<Build>();
         Rigidbody rb = gameObject.AddComponent<Rigidbody>();
         rb.isKinematic = true;
-        build.canBuild = true;
+        build.onCollision = true;
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (LayerMask.LayerToName(other.gameObject.layer) == "Ground" ||
-            LayerMask.LayerToName(other.gameObject.layer) == "Player")
-            return;
-        build.canBuild = false;
+        build.onCollision = false;
     }
+
     private void OnTriggerExit(Collider other)
     {
-        build.canBuild = true;
+        build.onCollision = true;
     }
+    //private void OnTriggerStay(Collider other)
+    //{
+    //    Debug.Log(other.name);
+    //    if (!build.canBuild)
+    //        build.canBuild = true;
+    //    if (LayerMask.LayerToName(other.gameObject.layer) == "Ground" ||
+    //        LayerMask.LayerToName(other.gameObject.layer) == "Player")
+    //        return;
+
+    //    build.canBuild = false;
+
+    //}
 }

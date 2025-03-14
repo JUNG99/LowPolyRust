@@ -1,3 +1,4 @@
+using Unity.Content;
 using UnityEngine;
 
 public class Build : MonoBehaviour
@@ -13,7 +14,8 @@ public class Build : MonoBehaviour
     [SerializeField] private float gridSize;
 
     public bool onBuild = false;
-    public bool canBuild;
+    public bool onCollision; // 부딫치고 있는지 확인
+    private bool buildCondition; // 파츠 조건
 
     private float _scroll;
 
@@ -57,10 +59,6 @@ public class Build : MonoBehaviour
                 _previewObj.transform.localScale = matter.transform.localScale;
                 boundSize = matter.transform.localScale;
             }
-            if (Input.GetMouseButtonDown(2))
-            {
-                _previewObj.transform.eulerAngles += new Vector3(0, 45, 0);
-            }
         }
     }
 
@@ -90,12 +88,12 @@ public class Build : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, 15f, LayerMask.GetMask("Ground")))
+        if (Physics.Raycast(ray, out RaycastHit hit, 15f, LayerMask.GetMask("Ground","Build")))
         {
             _curPreviewObj = hit.collider.gameObject;
             CreateSnapPos(hit.collider.gameObject);
 
-            if ((LayerMask.GetMask("Ground") & (1 << hit.collider.gameObject.layer)) != 0 && (hit.collider.CompareTag("Floor") || hit.collider.CompareTag("Wall")))
+            if ((LayerMask.GetMask("Build") & (1 << hit.collider.gameObject.layer)) != 0 && (hit.collider.CompareTag("Floor") || hit.collider.CompareTag("Wall")))
             {
                 if (_curPreviewObj != lastHitObj)
                 {
@@ -120,32 +118,61 @@ public class Build : MonoBehaviour
                     {
                         buildPos += new Vector3(0, distancePreview.y * boundSize.y * 0.5f, 0);
                     } 
-                }
-                if (!Mathf.Approximately(distancePreview.x, 0))
-                {
-                    buildPos += new Vector3(distancePreview.x * boundSize.x * 0.5f, 0, 0);
-                }
+                    if (!Mathf.Approximately(distancePreview.x, 0))
+                    {
+                        buildPos += new Vector3(distancePreview.x * boundSize.x * 0.5f, 0, 0);
+                    }
 
-                if (!Mathf.Approximately(distancePreview.z, 0))
-                {
-                    buildPos += new Vector3(0, 0, distancePreview.z * boundSize.z * 0.5f);
+                    if (!Mathf.Approximately(distancePreview.z, 0))
+                    {
+                        buildPos += new Vector3(0, 0, distancePreview.z * boundSize.z * 0.5f);
+                    }
                 }
             }
             else
             {
                 buildPos = new Vector3(Mathf.Round(hit.point.x / gridSize) * gridSize, Mathf.Round(hit.point.y / gridSize) * gridSize, Mathf.Round(hit.point.z / gridSize) * gridSize);
             }
+
+            buildCondition = BuildCondition(hit.collider);
+
         }
         _previewObj.transform.position = buildPos;
-        matterMaterial.color = canBuild ? new Color(0, 0, 1, 0.2f) : new Color(1, 0, 0, 0.2f);
+        matterMaterial.color = onCollision && buildCondition ? new Color(0, 0, 1, 0.2f) : new Color(1, 0, 0, 0.2f);
     }
+
+    bool BuildCondition(Collider hitCollider)
+    {
+        if (_previewObj.CompareTag("Floor"))
+        {
+            return true;  // 바닥은 항상 가능
+        }
+
+        if (hitCollider.CompareTag(_previewObj.tag))
+        {
+            return true;  // 같은 종류끼리는 가능
+        }
+        if (hitCollider.CompareTag("Floor") && _previewObj.CompareTag("Wall"))
+        {
+            return true;  // 벽은 바닥에서 가능
+        }
+
+        if (hitCollider.CompareTag("Wall") && _previewObj.CompareTag("Roof"))
+        {
+            return true;  // 지붕은 벽에서 가능
+        }
+
+        return false;  // 그 외의 경우는 불가능
+    }
+
     void OnPreview()
     {
         if (Input.GetMouseButtonDown(0) && !onBuild && matter)
         {
             onBuild = true;
             _previewObj = Instantiate(matter);
-            _previewObj.layer = LayerMask.NameToLayer("Player");
+            _previewObj.AddComponent<PreviewCollisionCheck>();
+            _previewObj.layer = LayerMask.NameToLayer("Preview");
             matterMaterial = _previewObj.GetComponent<Renderer>().material;
             Collider col = _previewObj.GetComponent<Collider>();
             if (col != null)
@@ -159,7 +186,7 @@ public class Build : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1) && onBuild)
         {
-            if (canBuild)
+            if (onCollision)
             {
                 GameObject obj = Instantiate(matter, buildPos, Quaternion.Euler(_previewObj.transform.eulerAngles));
                 obj.transform.localScale = _previewObj.transform.localScale;
