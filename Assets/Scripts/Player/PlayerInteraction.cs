@@ -31,7 +31,7 @@ public class PlayerInteraction : MonoBehaviour
 
             if (interactable != null)
             {
-                interactable.Interact();
+                //interactable.Interact();
             }
             else if (hit.collider.CompareTag("Item")) // 인터페이스가 없을 경우 기본 처리
             {
