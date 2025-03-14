@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2400136772143859403}
   - component: {fileID: 6838999720881800391}
-  m_Layer: 0
+  m_Layer: 27
   m_Name: Plant_Flowers_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,7 +69,8 @@ GameObject:
   - component: {fileID: 3228848815687154071}
   - component: {fileID: 4995847497811062086}
   - component: {fileID: 6264746565215778567}
-  m_Layer: 0
+  - component: {fileID: 5764635915550619919}
+  m_Layer: 27
   m_Name: Flowers_02_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,6 +163,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.2, y: 0.36221355, z: 0.2}
   m_Center: {x: 0, y: 0.17206362, z: 0}
+--- !u!114 &5764635915550619919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2324699879616392804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec9b7fafd12121243878142f85ad64bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  naturalObjectData: {fileID: 11400000, guid: df8a8a07c32fa1e418038e295c2b36b6, type: 2}
 --- !u!1 &8663050820594852814
 GameObject:
   m_ObjectHideFlags: 0
@@ -173,7 +187,7 @@ GameObject:
   - component: {fileID: 4672747081477392741}
   - component: {fileID: 3353303649374891499}
   - component: {fileID: 767898522319831218}
-  m_Layer: 0
+  m_Layer: 27
   m_Name: Flowers_02_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
