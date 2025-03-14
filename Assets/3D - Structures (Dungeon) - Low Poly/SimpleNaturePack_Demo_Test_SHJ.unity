@@ -591,9 +591,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   matter: {fileID: 5743507171032473749, guid: 6e936bb8ac208324f9e75d4498004e24, type: 3}
-  gridSize: 0.1
+  _gridSize: 0.1
   onBuild: 0
-  canBuild: 0
+  onCollision: 0
+  buildCondition: 0
 --- !u!1 &1182699437
 GameObject:
   m_ObjectHideFlags: 0

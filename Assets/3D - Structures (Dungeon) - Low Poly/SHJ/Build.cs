@@ -4,7 +4,7 @@ using UnityEngine;
 public class Build : MonoBehaviour
 {
     public GameObject matter;
-    private Material matterMaterial;
+    private Material _matterMaterial;
     private GameObject _curPreviewObj;
     private GameObject _previewObj;
 
@@ -20,7 +20,7 @@ public class Build : MonoBehaviour
 
     private float _scroll;
 
-    private GameObject lastHitObj = null;  // 이전에 본 오브젝트를 추적하는 변수
+    private GameObject _lastHitObj = null;  // 이전에 본 오브젝트를 추적하는 변수
 
     private void Update()
     {
@@ -62,7 +62,7 @@ public class Build : MonoBehaviour
             }
             if(Input.GetMouseButtonDown(2))
             {
-                _previewObj.transform.rotation *= Quaternion.Euler(0, 45, 0);
+                _previewObj.transform.rotation *= Quaternion.Euler(0, 90, 0);
                 _isChangeObj = true;
             }
         }
@@ -98,13 +98,13 @@ public class Build : MonoBehaviour
         {
             _curPreviewObj = hit.collider.gameObject;
 
-            if ((LayerMask.GetMask("Build") & (1 << hit.collider.gameObject.layer)) != 0 && (hit.collider.CompareTag("Floor") || hit.collider.CompareTag("Wall")))
+            if ((LayerMask.GetMask("Build") & (1 << hit.collider.gameObject.layer)) != 0 && (hit.collider.CompareTag("Floor") || hit.collider.CompareTag("Wall"))) //부딫친 오브젝트의 Layer가 Build이거나 태그가 Floor또는Wall일 때
             {
-                if (_curPreviewObj != lastHitObj || _isChangeObj)
+                if (_curPreviewObj != _lastHitObj || _isChangeObj)
                 {
                     _isChangeObj = false;
                     CreateSnapPos(hit.collider.gameObject);
-                    lastHitObj = _curPreviewObj;
+                    _lastHitObj = _curPreviewObj;
                 }
 
                 float minDistance = float.MaxValue;
@@ -145,7 +145,7 @@ public class Build : MonoBehaviour
 
         }
         _previewObj.transform.position = _buildPos;
-        matterMaterial.color = onCollision && buildCondition ? new Color(0, 0, 1, 0.2f) : new Color(1, 0, 0, 0.2f);
+        _matterMaterial.color = onCollision && buildCondition ? new Color(0, 0, 1, 0.2f) : new Color(1, 0, 0, 0.2f);
     }
 
     bool BuildCondition(Collider hitCollider)
@@ -180,7 +180,7 @@ public class Build : MonoBehaviour
             _previewObj = Instantiate(matter);
             _previewObj.AddComponent<PreviewCollisionCheck>();
             _previewObj.layer = LayerMask.NameToLayer("Preview");
-            matterMaterial = _previewObj.GetComponent<Renderer>().material;
+            _matterMaterial = _previewObj.GetComponent<Renderer>().material;
             _collider = _previewObj.GetComponent<Collider>();
             if (_collider != null)
             {
