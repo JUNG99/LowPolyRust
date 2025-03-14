@@ -16,9 +16,9 @@ public class PlayerStats : MonoBehaviour
     public float hpDecreaseRate = 5f;
 
     //UI 요소 추가
-    public Slider hpBar;
-    public Slider hungerBar;
-    public Slider thirstBar;
+    public Image hpBar;
+    public Image hungerBar;
+    public Image thirstBar;
 
     private void Start()
     {
@@ -56,8 +56,8 @@ public class PlayerStats : MonoBehaviour
 
     void UpdateUI()
     {
-        if (hpBar) hpBar.value = currentHP;
-        if (hungerBar) hungerBar.value = currentHunger;
-        if (thirstBar) thirstBar.value = currentThirst;
+        if (hpBar) hpBar.fillAmount = currentHP;
+        if (hungerBar) hungerBar.fillAmount = currentHunger;
+        if (thirstBar) thirstBar.fillAmount = currentThirst;
     }
 }
