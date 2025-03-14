@@ -10,20 +10,10 @@ public class EnemyAI : MonoBehaviour
         AttackMode   // 특정 타겟 추적 및 공격
     }
     
-    // 적 행동 상태 정의
-    public enum ActionState
-    {
-        Idle,   // 정지
-        Move,   // 이동
-        Attack  // 공격
-    }
-
     // 기본 AI 상태 모드 (인스펙터에서 제어 가능하지만, 자동 모드 전환도 수행)
     public AIState currentState = AIState.WonderMode;
     public bool autoModeSwitch = true;
     
-    private ActionState currentAction = ActionState.Idle;
-
     // 적의 타겟
     public Transform target;
 
@@ -35,6 +25,9 @@ public class EnemyAI : MonoBehaviour
     public float fieldOfView = 120f; // 시야각 (도 단위)
     public float attackRange = 1f;  // 공격 사거리
     public float watchRange = 10f;  // 주시 사거리 (외부 반경)
+    
+    // 적의 드랍 아이템
+    public GameObject dropItem;
 
     // WonderMode 설정: 이동 반경과 재설정 시간
     public float wanderRadius = 10f;
@@ -124,7 +117,7 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    // 공격 로직
+    // 적이 타겟한테 데미지 주기
     void Attack()
     {
         if (target != null)
@@ -133,6 +126,17 @@ public class EnemyAI : MonoBehaviour
             animator.SetTrigger("Attack");
         }
         // >> 타겟의 HP를 감소시키는 로직을 추가 <<
+    }
+    
+    // 적이 타겟한테 데미지 받기
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+        Debug.Log("Enemy took " + damage + " damage. Health: " + health);
+        if (health <= 0)
+        {
+            Die();
+        }
     }
 
     // 타겟의 존재를 확인하는 함수
@@ -158,7 +162,7 @@ public class EnemyAI : MonoBehaviour
                 if (hit.transform == target)
                 {
                     targetFound = true;
-                    Debug.Log("Target Found");
+                    // Debug.Log("Target Found");
                     break;
                 }
             }
@@ -166,7 +170,7 @@ public class EnemyAI : MonoBehaviour
             // 타겟이 없는 경우
             if (!targetFound)
             {
-                Debug.Log("Target Not Found");
+                // Debug.Log("Target Not Found");
                 return false;
             }
             
@@ -210,6 +214,20 @@ public class EnemyAI : MonoBehaviour
             animator.SetFloat("Move", 0f);
         }
     }
+
+    // 적의 사망 처리
+    void Die()
+    {
+        Debug.Log("Enemy died.");
+        // 드랍할 아이템 있다면, 현재 위치에 생성
+        if (dropItem != null)
+        {
+            Instantiate(dropItem, transform.position, Quaternion.identity);
+        }
+        // 적 프리팹 제거
+        Destroy(gameObject);
+    }
+
     
     // 적의 사거리 시각화
     void OnDrawGizmosSelected()

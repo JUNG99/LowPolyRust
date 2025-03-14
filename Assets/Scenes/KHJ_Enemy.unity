@@ -333,6 +333,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Horse_001
       objectReference: {fileID: 0}
+    - target: {fileID: 3851015956068934394, guid: dfb23d60f30c46847ba7815aa09e2567, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 4483999970917742656, guid: dfb23d60f30c46847ba7815aa09e2567, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -377,6 +381,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1088936824}
+    - target: {fileID: 5715469279851176533, guid: dfb23d60f30c46847ba7815aa09e2567, type: 3}
+      propertyPath: dropItem
+      value: 
+      objectReference: {fileID: 1822718234530777653, guid: d72bcfecb2a44f54193f09ac0dfa7d4d, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1024,11 +1032,11 @@ GameObject:
   - component: {fileID: 1796408003}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1796408002
 Transform:
   m_ObjectHideFlags: 0
@@ -1067,6 +1075,7 @@ MonoBehaviour:
   fieldOfView: 120
   attackRange: 3
   watchRange: 8
+  dropItem: {fileID: 0}
   wanderRadius: 10
   wanderTimer: 5
 --- !u!195 &1796408004
