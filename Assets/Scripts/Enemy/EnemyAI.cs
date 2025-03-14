@@ -62,8 +62,6 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
-        UpdateAnimation();
-        
         // 자동 모드 전환 (toggle enabled via autoModeSwitch / false일 경우, currentState는 인스펙터에서 설정된 값으로 유지됨)
         if (autoModeSwitch)
         {
@@ -205,11 +203,11 @@ public class EnemyAI : MonoBehaviour
         // 이동 속도가 약간이라도 있다면(예: 0.1f 이상이면) 걷는 모션, 그렇지 않으면 Idle 모션
         if (currentSpeed > 0.1f)
         {
-            animator.SetInteger("Move", 1);
+            animator.SetFloat("Move", 1f);
         }
         else
         {
-            animator.SetInteger("Move", 0);
+            animator.SetFloat("Move", 0f);
         }
     }
     

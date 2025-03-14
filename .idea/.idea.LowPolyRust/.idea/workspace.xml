@@ -6,44 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="361cf764-4719-4fad-8f9f-9104c849ace5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LowPolyRust/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LowPolyRust/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animals_FREE.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animals_FREE/Animations.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animals_FREE/Animations/Animation_Controllers.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animals_FREE/Animations/Animation_Controllers/Horse.controller" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animals_FREE/Animations/Animation_Controllers/Horse.controller.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animals_FREE/Animations/Horse_001.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animals_FREE/Animations/Horse_001.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animals_FREE/Animations/Materials.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animals_FREE/Animations/Materials/Floor.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animals_FREE/Animations/Materials/Floor.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animals_FREE/Animations/Materials/Material.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animals_FREE/Animations/Materials/Material.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animals_FREE/Animations/Meshes.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animals_FREE/Animations/Meshes/Horse_001.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animals_FREE/Animations/Meshes/Horse_001.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animals_FREE/Animations/Other_Animations.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animals_FREE/Animations/Other_Animations/Horse_001_eat.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animals_FREE/Animations/Other_Animations/Horse_001_eat.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animals_FREE/Animations/Other_Animations/Horse_001_idle.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animals_FREE/Animations/Other_Animations/Horse_001_idle.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animals_FREE/Animations/Other_Animations/Horse_001_run.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animals_FREE/Animations/Other_Animations/Horse_001_run.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animals_FREE/Animations/Other_Animations/Horse_001_walk.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animals_FREE/Animations/Other_Animations/Horse_001_walk.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animals_FREE/Animations/Textures.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animals_FREE/Animations/Textures/New Material.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animals_FREE/Animations/Textures/New Material.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animals_FREE/Animations/Textures/Texture.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animals_FREE/Animations/Textures/Texture.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/TestScene_HJ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/TestScene_HJ.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/TestScene_HJ.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/TestScene_HJ/NavMesh.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/TestScene_HJ/NavMesh.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/EnemyAI.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/EnemyAI.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyAI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyAI.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
