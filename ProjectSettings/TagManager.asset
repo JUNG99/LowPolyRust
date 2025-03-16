@@ -6,6 +6,9 @@ TagManager:
   tags:
   - resources
   - food
+  - Floor
+  - Ground
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -27,9 +30,9 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
+  - Player
+  - Build
+  - Preview
   - 
   - 
   - 
