@@ -1014,9 +1014,11 @@ MonoBehaviour:
   fieldOfView: 120
   attackRange: 1
   watchRange: 6
-  dropItem: {fileID: 0}
   wanderRadius: 6
   wanderTimer: 5
+  minWanderTime: 3
+  maxWanderTime: 7
+  dropItem: {fileID: 0}
   lowDistanceThreshold: 3
 --- !u!1 &6499904794721092959
 GameObject:

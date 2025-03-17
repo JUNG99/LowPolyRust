@@ -16,15 +16,16 @@ public class EnemyAI : MonoBehaviour
     
     // 적의 타겟
     public Transform target;
+    private float lostTargetTimer = 0f;
 
     // 적의 스텟
     public float health = 100f;
     public float moveSpeed = 1.0f;
-    public float hunger = 100f;
     public float fieldOfView = 120f; // 시야각 (도 단위)
     public float attackRange = 3f;  // 공격 사거리
     public float watchRange = 10f;  // 주시 사거리 (외부 반경)
-
+    public float attackDamage = 10f;
+    
     // 적 이동 반경과 재설정 시간
     public float wanderRadius = 10f;
     public float wanderTimer = 5f;
@@ -104,17 +105,33 @@ public class EnemyAI : MonoBehaviour
     void AttackUpdate()
     {
         if (target == null) return;
-
+        
         float distance = Vector3.Distance(transform.position, target.position);
+        
+        if (distance > wanderRadius)
+        {
+            lostTargetTimer += Time.deltaTime;
+            if (lostTargetTimer >= 10f)
+            {
+                currentState = AIState.WonderMode;
+                lostTargetTimer = 0f;
+                return;
+            }
+        }
+        else
+        {
+            lostTargetTimer = 0f;
+        }
+        
         if (distance <= attackRange)
         {
-            // 공격 사거리 내에 있으면 이동 멈추고 공격 실행
             agent.ResetPath();
             Attack();
         }
         else
         {
-            agent.speed = CalculateSpeed(distance, watchRange);
+            float baseSpeed = CalculateSpeed(distance, watchRange);
+            agent.speed = baseSpeed * 2.5f;
             agent.SetDestination(target.position);
         }
     }
@@ -124,14 +141,15 @@ public class EnemyAI : MonoBehaviour
     {
         if (target != null)
         {
-            Debug.Log("Enemy Attacks! Target takes damage.");
             animator.SetTrigger("Attack");
             
-            // PlayerStats playerStats = target.GetComponent<PlayerStats>();
-            // if (playerStats != null)
-            // {
-            //     playerStats.TakeDamage(10f);
-            // }
+            PlayerStats playerStats = target.GetComponent<PlayerStats>();
+            if (playerStats != null)
+            {
+                playerStats.TakeDamage(attackDamage);
+            }
+            
+            Debug.Log($"Enemy Attacks! {attackDamage} damage .");
         }
     }
     
@@ -139,7 +157,7 @@ public class EnemyAI : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
-        Debug.Log("Enemy took " + damage + " damage. Health: " + health);
+        Debug.Log($"Enemy took damage. Enemy Health: {health}");
         if (health <= 0)
         {
             Die();

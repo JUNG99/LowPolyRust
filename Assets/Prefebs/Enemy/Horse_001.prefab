@@ -753,16 +753,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   autoModeSwitch: 1
-  target: {fileID: 0}
+  target: {fileID: 2181454214924783095, guid: aa43953d7c50d4e448f210abf5c78ebf, type: 3}
   health: 100
   moveSpeed: 1
   hunger: 0
   fieldOfView: 120
   attackRange: 3
   watchRange: 8
-  dropItem: {fileID: 1827420617751670965, guid: 8ac2d2444ef001347ac5d9567c1f5361, type: 3}
   wanderRadius: 8
   wanderTimer: 5
+  minWanderTime: 3
+  maxWanderTime: 7
+  dropItem: {fileID: 1827420617751670965, guid: 8ac2d2444ef001347ac5d9567c1f5361, type: 3}
   lowDistanceThreshold: 3
 --- !u!1 &3955406351709833468
 GameObject:
