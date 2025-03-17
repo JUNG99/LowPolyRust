@@ -720,11 +720,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 123564282802121289, guid: 9aae83bac5164684b855e4fdcd84ab27, type: 3}
       propertyPath: interactableLayer.m_Bits
-      value: 402653184
+      value: 268435456
       objectReference: {fileID: 0}
     - target: {fileID: 612092886322675352, guid: 9aae83bac5164684b855e4fdcd84ab27, type: 3}
       propertyPath: attackRange
-      value: 10
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 612092886322675352, guid: 9aae83bac5164684b855e4fdcd84ab27, type: 3}
+      propertyPath: interactableLayer.m_Bits
+      value: 134217728
       objectReference: {fileID: 0}
     - target: {fileID: 3446579734398874014, guid: 9aae83bac5164684b855e4fdcd84ab27, type: 3}
       propertyPath: jumpForce

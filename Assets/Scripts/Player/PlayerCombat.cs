@@ -5,17 +5,22 @@ public class PlayerCombat : MonoBehaviour
     public float attackRange = 2f; // 공격/채집 범위
     public int attackDamage = 10; // 공격력
     public LayerMask interactableLayer; // 상호작용 가능한 레이어
-    
+
+    private Build buildScript;
 
 
+  
     void Update()
     {
         
         
-        if (Input.GetMouseButtonDown(0)) // 마우스 좌클릭
+        if (Input.GetMouseButtonDown(0) && !buildScript.BuildMode)
         {
             Attack();
         }
+       
+                
+        
     }
 
     void Attack()
@@ -42,6 +47,8 @@ public class PlayerCombat : MonoBehaviour
                 }
             }
         }
+
+        Debug.DrawRay(rayStartPosition, transform.forward * attackRange, Color.red, 0.1f);
     }
 
   
