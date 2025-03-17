@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class Build : MonoBehaviour
 {
-    public GameObject[] matter;
+    private GameObject[] matter;
     [SerializeField] private int index = 0;
     private Material _matterMaterial;
     private GameObject _curPreviewObj;
@@ -29,6 +31,12 @@ public class Build : MonoBehaviour
 
     private GameObject _lastHitObj = null;  // 이전에 본 오브젝트를 추적하는 변수
 
+    private void Start()
+    {
+        matter = Resources.LoadAll<GameObject>("Build");
+        matter = matter.OrderBy(x => ExtractNumber(x.name)).ThenBy(x => x.name).ToArray();
+    }
+
     private void Update()
     {
         OnPreview();
@@ -41,6 +49,12 @@ public class Build : MonoBehaviour
         }
         MakeRoof();
 
+    }
+    // 정렬을 위해 숫자 분리
+    int ExtractNumber(string name)
+    {
+        Match match  = Regex.Match(name, @"\d+");
+        return match.Success ? int.Parse(match.Value) : int.MaxValue;
     }
 
     void UpdateObj()
@@ -118,33 +132,6 @@ public class Build : MonoBehaviour
                     GameObject instance = Instantiate(obj, obj.transform.position + Vector3.up * 6f, Quaternion.identity);
                     instance.tag = "Roof";
                 }
-                ////테스트2
-                //float height = 1f;
-                //float distance = 1f;
-                //int colNum = 0;
-
-                //foreach (GameObject obj in list)
-                //{
-                //    Ray[] makeRay = new Ray[4]
-                //    {
-                //        new Ray(obj.transform.position + Vector3.up * height, Vector3.forward),
-                //        new Ray(obj.transform.position + Vector3.up * height, -Vector3.forward),
-                //        new Ray(obj.transform.position + Vector3.up * height, Vector3.right),
-                //        new Ray(obj.transform.position + Vector3.up * height, -Vector3.right),
-                //    };
-                //    for(int i = 0; i < makeRay.Length; i++)
-                //    {
-                //        if (Physics.Raycast(makeRay[i], distance,LayerMask.GetMask("Build")))
-                //        {
-                //            colNum++;
-                //        }
-                //    }
-                //    if(colNum >= 2)
-                //    {
-                //        GameObject instance = Instantiate(obj, obj.transform.position + Vector3.up * height * 5f, Quaternion.identity);
-                //        instance.tag = "Roof";
-                //    }
-                //}
             }
         }
     }
@@ -296,36 +283,35 @@ public class Build : MonoBehaviour
         return connectFloor.ToList();
     }
 
-    //// 오브젝트와 연결된 모든 Floor태그를 가진 오브젝트에서 벽과 충돌하였을 경우 벽을 저장
-    //List<GameObject> GetConnectedWalls(GameObject startFloor)
-    //{
-    //    List<GameObject> connectedFloors = GetConnectedFloorTile(startFloor);
-    //    HashSet<GameObject> connectedWalls = new();
+    // 오브젝트와 연결된 모든 Floor태그를 가진 오브젝트에서 벽과 충돌하였을 경우 벽을 저장
+    List<GameObject> GetConnectedWalls(GameObject startFloor)
+    {
+        List<GameObject> connectedFloors = GetConnectedFloorTile(startFloor);
+        HashSet<GameObject> connectedWalls = new();
 
-    //    foreach (GameObject floor in connectedFloors)
-    //    {
-    //        Collider[] colliders = Physics.OverlapBox(floor.transform.position, floor.GetComponent<Collider>().bounds.extents, Quaternion.identity, LayerMask.GetMask("Build"));
-    //        foreach (Collider col in colliders)
-    //        {
-    //            if (col.gameObject.CompareTag("Wall"))
-    //            {
-    //                connectedWalls.Add(col.gameObject);
-    //            }
-    //        }
-    //    }
-    //    return connectedWalls.ToList();
-    //}
+        foreach (GameObject floor in connectedFloors)
+        {
+            Collider[] colliders = Physics.OverlapBox(floor.transform.position, floor.GetComponent<Collider>().bounds.extents, Quaternion.identity, LayerMask.GetMask("Build"));
+            foreach (Collider col in colliders)
+            {
+                if (col.gameObject.CompareTag("Wall"))
+                {
+                    connectedWalls.Add(col.gameObject);
+                }
+            }
+        }
+        return connectedWalls.ToList();
+    }
     //// 벽들의 최대 높이
     //float GetMaxWallHeight(List<GameObject> walls)
     //{
     //    float maxHeight = 0f;
     //    foreach (GameObject wall in walls)
     //    {
-    //        float height = wall.transform.position.y + wall.GetComponent<Collider>().bounds.size.y * 0.5f;
-    //        if (height > maxHeight)
-    //        {
-    //            maxHeight = height;
-    //        }
+    //        Ray ray = new Ray(wall.transform.position, Vector3.up);
+    //        RaycastHit[] hits =  Physics.RaycastAll(ray, 100, LayerMask.GetMask("Floor"));
+
+    //        float fathesHeight = hits.Max
     //    }
     //    return maxHeight;
     //}
