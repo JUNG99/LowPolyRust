@@ -377,6 +377,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1088936824}
+    - target: {fileID: 5715469279851176533, guid: dfb23d60f30c46847ba7815aa09e2567, type: 3}
+      propertyPath: moveSpeed
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1126,6 +1130,7 @@ MonoBehaviour:
   dropItem: {fileID: 0}
   wanderRadius: 10
   wanderTimer: 5
+  lowDistanceThreshold: 3
 --- !u!195 &1796408004
 NavMeshAgent:
   m_ObjectHideFlags: 0
