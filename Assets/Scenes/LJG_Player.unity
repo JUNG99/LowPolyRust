@@ -6413,6 +6413,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4540229000190281644, guid: 60770bdb4dc667c45bea53db0339dc05, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 57d1745d6d2b2e840a5c56e8960614c0, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -6552,7 +6556,7 @@ MonoBehaviour:
   interactionRange: 2
   interactableLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 268435456
 --- !u!114 &1075888512
 MonoBehaviour:
   m_ObjectHideFlags: 0
