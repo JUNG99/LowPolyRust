@@ -24,14 +24,16 @@ public class EnemyAI : MonoBehaviour
     public float fieldOfView = 120f; // 시야각 (도 단위)
     public float attackRange = 3f;  // 공격 사거리
     public float watchRange = 10f;  // 주시 사거리 (외부 반경)
-    
-    // 적의 드랍 아이템
-    public GameObject dropItem;
 
-    // WonderMode 설정: 이동 반경과 재설정 시간
+    // 적 이동 반경과 재설정 시간
     public float wanderRadius = 10f;
     public float wanderTimer = 5f;
     private float wanderTimerCounter;
+    public float minWanderTime = 3f;
+    public float maxWanderTime = 7f;
+    
+    // 적의 드랍 아이템
+    public GameObject dropItem;
 
     // 참조
     private NavMeshAgent agent;
@@ -94,6 +96,7 @@ public class EnemyAI : MonoBehaviour
         {
             SetNewDestination();
             wanderTimerCounter = 0;
+            wanderTimer = Random.Range(minWanderTime, maxWanderTime);
         }
     }
 
