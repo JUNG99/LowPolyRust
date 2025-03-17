@@ -52,22 +52,22 @@ public class UIInventory : MonoBehaviour
         DiscardButton.SetActive(false);
     }
 
-    //public void Toggle()
-    //{
-    //    if (IsOpen())
-    //    {
-    //        inventoryWindow.SetActive(false);
-    //    }
-    //    else
-    //    {
-    //        inventoryWindow.SetActive(true);
-    //    }
-    //}
+    public void Toggle()
+    {
+        if (IsOpen())
+        {
+            inventoryWindow.SetActive(false);
+        }
+        else
+        {
+            inventoryWindow.SetActive(true);
+        }
+    }
 
-    //public bool IsOpen()
-    //{
-    //    return inventoryWindow.activeInHierarchy;
-    //}
+    public bool IsOpen()
+    {
+        return inventoryWindow.activeInHierarchy;
+    }
 
     //PlayerController 먼저 수정
 
