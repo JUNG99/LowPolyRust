@@ -5,9 +5,13 @@ public class PlayerCombat : MonoBehaviour
     public float attackRange = 2f; // 공격/채집 범위
     public int attackDamage = 10; // 공격력
     public LayerMask interactableLayer; // 상호작용 가능한 레이어
+    
+
 
     void Update()
     {
+        
+        
         if (Input.GetMouseButtonDown(0)) // 마우스 좌클릭
         {
             Attack();
@@ -17,6 +21,7 @@ public class PlayerCombat : MonoBehaviour
     void Attack()
     {
         RaycastHit hit;
+        Vector3 rayStartPosition = transform.position + Vector3.up * 1.5f;
 
         // Raycast로 공격 범위 내의 물체를 탐지
         if (Physics.Raycast(transform.position, transform.forward, out hit, attackRange, interactableLayer))
