@@ -83,7 +83,7 @@ public class EnemyAI : MonoBehaviour
         else if (currentState == AIState.WonderMode)
         {
             WanderUpdate();
-            Debug.Log("Wandering");
+            //Debug.Log("Wandering");
         }
         
         UpdateAnimation();
