@@ -6,11 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="361cf764-4719-4fad-8f9f-9104c849ace5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LowPolyRust/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LowPolyRust/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/KHJ_Enemy.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/KHJ_Enemy.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyAI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyAI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyAssets/Animals_FREE/Animations/Animation_Controllers/Horse.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyAssets/Animals_FREE/Animations/Animation_Controllers/Horse.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyAssets/Animals_FREE/Prefabs/Horse_001.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyAssets/Animals_FREE/Prefabs/Horse_001.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyAssets/Animals_FREE/Prefabs/Kitty_001.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyAssets/Animals_FREE/Prefabs/Kitty_001.prefab" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

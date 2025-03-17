@@ -19,10 +19,10 @@ public class EnemyAI : MonoBehaviour
 
     // 적의 스텟
     public float health = 100f;
-    public float moveSpeed = 3.5f;
+    public float moveSpeed = 1.0f;
     public float hunger = 100f;
     public float fieldOfView = 120f; // 시야각 (도 단위)
-    public float attackRange = 1f;  // 공격 사거리
+    public float attackRange = 3f;  // 공격 사거리
     public float watchRange = 10f;  // 주시 사거리 (외부 반경)
     
     // 적의 드랍 아이템
@@ -202,16 +202,19 @@ public class EnemyAI : MonoBehaviour
         return navHit.position;
     }
     
+    
     // 이동 거리에 따른 속도
+    public float lowDistanceThreshold = 3f;
     float CalculateSpeed(float distance, float maxDistance)
     {
-        // t: 현재 남은 거리를 정규화 (0: 도착, 1: 시작)
+        // 1. 현재 거리를 최대 거리로 나누어 0~1 사이의 값 t를 만듭니다.
         float t = Mathf.Clamp01(distance / maxDistance);
-        // multiplier: t가 0 또는 1일 때 0.8, t가 0.5일 때 1.0 (즉, 앞뒤로 20% 낮게, 중간은 기준 속도)
-        float multiplier = Mathf.Lerp(0.8f, 1f, 1f - Mathf.Abs(t - 0.5f) * 2f);
-        // baseSpeed: 선형 보간으로 moveSpeed에서 moveSpeed * 2까지 결정
+        // 2. t 값을 제곱하여 짧은 거리에서의 민감도를 높입니다.
+        t = Mathf.Pow(t, 2f);
+        // 3. moveSpeed에서 moveSpeed * 2까지 선형 보간하여 기본 속도를 결정합니다.
         float baseSpeed = Mathf.Lerp(moveSpeed, moveSpeed * 2f, t);
-        return baseSpeed * multiplier;
+        
+        return baseSpeed;
     }
     
     void UpdateAnimation()
