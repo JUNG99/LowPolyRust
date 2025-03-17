@@ -1,10 +1,11 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerItemPickup : MonoBehaviour
 {
     public float pickupRange = 3f; // 아이템을 감지할 거리
     public Camera playerCamera; // 플레이어의 카메라
-
+    private UIInventory inventory;
     void Update()
     {
         // Ray를 시각적으로 계속 표시
@@ -33,6 +34,7 @@ public class PlayerItemPickup : MonoBehaviour
     void PickupItem(GameObject item)
     {
         Debug.Log($"{item.name} 아이템을 획득했습니다!");
-        Destroy(item); // 아이템 제거 (인벤토리 시스템이 있다면 추가하는 방식으로 변경 가능)
+        // item을 UIInventory.cs에 존재하는 slots에 순차적으로 추가하는 코드 구현
+        Destroy(item);
     }
 }

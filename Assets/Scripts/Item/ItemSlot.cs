@@ -5,19 +5,21 @@ public class ItemSlot : MonoBehaviour
 {
     public ItemData item;
 
+    public GameObject storedItem;
+
     public UIInventory inventory;
     public bool equipped;
     public int quantity;
 
     public int index;
-
-    void Start()
+    public bool IsEmpty()
     {
-        
+        return storedItem == null;
     }
 
-    void Update()
+    public void SetItem(GameObject item)
     {
-        
+        storedItem = item;
     }
+
 }

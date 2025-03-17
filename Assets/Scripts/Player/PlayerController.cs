@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     private float mouseSensitivity = 2f;
     private float xRotation = 0f;
 
-    private UIInventory inventory; // 🔥 인벤토리 참조 추가
+    public UIInventory inventory; // 🔥 인벤토리 참조 추가
 
     // 카메라 회전 제어 변수
     private bool canLook = true;
