@@ -696,6 +696,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 123564282802121289, guid: 9aae83bac5164684b855e4fdcd84ab27, type: 3}
+      propertyPath: interactionRange
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 123564282802121289, guid: 9aae83bac5164684b855e4fdcd84ab27, type: 3}
+      propertyPath: interactableLayer.m_Bits
+      value: 402653184
+      objectReference: {fileID: 0}
+    - target: {fileID: 612092886322675352, guid: 9aae83bac5164684b855e4fdcd84ab27, type: 3}
+      propertyPath: attackRange
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3446579734398874014, guid: 9aae83bac5164684b855e4fdcd84ab27, type: 3}
+      propertyPath: jumpForce
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3446579734398874014, guid: 9aae83bac5164684b855e4fdcd84ab27, type: 3}
+      propertyPath: walkSpeed
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3446579734398874014, guid: 9aae83bac5164684b855e4fdcd84ab27, type: 3}
+      propertyPath: crouchSpeed
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3446579734398874014, guid: 9aae83bac5164684b855e4fdcd84ab27, type: 3}
+      propertyPath: sprintSpeed
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 3446579734398874014, guid: 9aae83bac5164684b855e4fdcd84ab27, type: 3}
       propertyPath: cameraHolder
       value: 

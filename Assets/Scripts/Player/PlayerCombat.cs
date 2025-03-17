@@ -16,20 +16,28 @@ public class PlayerCombat : MonoBehaviour
 
     void Attack()
     {
-        void Attack()
+        RaycastHit hit;
+
+        // Raycast로 공격 범위 내의 물체를 탐지
+        if (Physics.Raycast(transform.position, transform.forward, out hit, attackRange, interactableLayer))
         {
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.forward, out hit, attackRange))
+            // 적과의 상호작용
+            EnemyAI enemy = hit.collider.GetComponent<EnemyAI>();
+            if (enemy != null)
             {
-                EnemyAI enemy = hit.collider.GetComponent<EnemyAI>();
-                if (enemy != null)
+                enemy.TakeDamage(attackDamage);  // 적 체력 감소
+            }
+
+            // NaturalObject와의 상호작용
+            {
+                NaturalObject naturalObject = hit.collider.GetComponent<NaturalObject>();
+                if (naturalObject != null)
                 {
-                    enemy.TakeDamage(10f);  // 적 체력 감소
+                    naturalObject.HarvesstNatureObject();
                 }
             }
         }
-
     }
 
-
+  
 }
