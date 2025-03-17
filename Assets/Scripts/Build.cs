@@ -41,6 +41,7 @@ public class Build : MonoBehaviour
 
     private void Update()
     {
+        changeMode();
         if ((buildMode))
         {
             OnPreview();
@@ -61,6 +62,13 @@ public class Build : MonoBehaviour
         return match.Success ? int.Parse(match.Value) : int.MaxValue;
     }
 
+    void changeMode()
+    {
+        if(Input.GetKeyUp(KeyCode.P))
+        {
+            buildMode = !buildMode;
+        }
+    }
     void UpdateObj()
     {
         if (_previewObj != null)
