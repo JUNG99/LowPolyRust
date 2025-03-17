@@ -29,6 +29,8 @@ public class Build : MonoBehaviour
 
     private float _scroll;
 
+    public bool buildMode = false;
+
     private GameObject _lastHitObj = null;  // 이전에 본 오브젝트를 추적하는 변수
 
     private void Start()
@@ -39,16 +41,18 @@ public class Build : MonoBehaviour
 
     private void Update()
     {
-        OnPreview();
-        if (onBuild)
+        if ((buildMode))
         {
-            Preview();
-            CollisionCheck();
-            OnBuild();
-            UpdateObj();
+            OnPreview();
+            if (onBuild)
+            {
+                Preview();
+                CollisionCheck();
+                OnBuild();
+                UpdateObj();
+            }
+            MakeRoof();
         }
-        MakeRoof();
-
     }
     // 정렬을 위해 숫자 분리
     int ExtractNumber(string name)
@@ -126,9 +130,13 @@ public class Build : MonoBehaviour
             {
                 if (!hit.collider.gameObject.CompareTag("Floor")) return;
                 List<GameObject> list = GetConnectedFloorTile(hit.collider.gameObject);
+                //GameObject wall = GetMaxWallHeight(GetConnectedWalls(hit.collider.gameObject));
+                //Vector3 height = new Vector3();
+
                 //테스트1
                 foreach (GameObject obj in list)
                 {
+
                     GameObject instance = Instantiate(obj, obj.transform.position + Vector3.up * 6f, Quaternion.identity);
                     instance.tag = "Roof";
                 }
@@ -302,19 +310,26 @@ public class Build : MonoBehaviour
         }
         return connectedWalls.ToList();
     }
-    //// 벽들의 최대 높이
-    //float GetMaxWallHeight(List<GameObject> walls)
-    //{
-    //    float maxHeight = 0f;
-    //    foreach (GameObject wall in walls)
-    //    {
-    //        Ray ray = new Ray(wall.transform.position, Vector3.up);
-    //        RaycastHit[] hits =  Physics.RaycastAll(ray, 100, LayerMask.GetMask("Floor"));
+    // 가장 높이 있는 벽
+    GameObject GetMaxWallHeight(List<GameObject> walls)
+    {
+        GameObject highWall = null;
+        float maxHeight = 0f;
+        foreach (GameObject wall in walls)
+        {
+            Ray ray = new Ray(wall.transform.position, Vector3.up);
+            RaycastHit[] hits = Physics.RaycastAll(ray, 100, LayerMask.GetMask("Floor"));
 
-    //        float fathesHeight = hits.Max
-    //    }
-    //    return maxHeight;
-    //}
+            float fathesHeight = hits.Max(h =>h.distance);
+
+            if(fathesHeight > maxHeight)
+            {
+                maxHeight = fathesHeight;
+                highWall = wall;
+            }
+        }
+        return highWall;
+    }
 
     void CollisionCheck()
     {
