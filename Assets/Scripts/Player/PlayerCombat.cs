@@ -5,9 +5,13 @@ public class PlayerCombat : MonoBehaviour
     public float attackRange = 2f; // 공격/채집 범위
     public int attackDamage = 10; // 공격력
     public LayerMask interactableLayer; // 상호작용 가능한 레이어
+    
+
 
     void Update()
     {
+        
+        
         if (Input.GetMouseButtonDown(0)) // 마우스 좌클릭
         {
             Attack();
@@ -16,20 +20,29 @@ public class PlayerCombat : MonoBehaviour
 
     void Attack()
     {
-        void Attack()
+        RaycastHit hit;
+        Vector3 rayStartPosition = transform.position + Vector3.up * 1.5f;
+
+        // Raycast로 공격 범위 내의 물체를 탐지
+        if (Physics.Raycast(rayStartPosition,transform.position, out hit, attackRange, interactableLayer))
         {
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.forward, out hit, attackRange))
+            // 적과의 상호작용
+            EnemyAI enemy = hit.collider.GetComponent<EnemyAI>();
+            if (enemy != null)
             {
-                EnemyAI enemy = hit.collider.GetComponent<EnemyAI>();
-                if (enemy != null)
+                enemy.TakeDamage(attackDamage);  // 적 체력 감소
+            }
+
+            // NaturalObject와의 상호작용
+            {
+                NaturalObject naturalObject = hit.collider.GetComponent<NaturalObject>();
+                if (naturalObject != null)
                 {
-                    enemy.TakeDamage(10f);  // 적 체력 감소
+                    naturalObject.HarvesstNatureObject();
                 }
             }
         }
-
     }
 
-
+  
 }
