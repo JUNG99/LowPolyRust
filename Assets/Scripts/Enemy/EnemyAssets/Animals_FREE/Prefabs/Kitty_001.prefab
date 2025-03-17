@@ -1009,8 +1009,8 @@ MonoBehaviour:
   autoModeSwitch: 0
   target: {fileID: 0}
   health: 100
-  moveSpeed: 3.5
-  runSpeed: 7
+  moveSpeed: 0.5
+  runSpeed: 1
   hunger: 100
   fieldOfView: 120
   attackRange: 1

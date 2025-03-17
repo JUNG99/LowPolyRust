@@ -648,7 +648,7 @@ GameObject:
   - component: {fileID: 5715469279851176533}
   m_Layer: 0
   m_Name: Horse_001
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -661,7 +661,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3851015956068934394}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -755,12 +755,12 @@ MonoBehaviour:
   autoModeSwitch: 1
   target: {fileID: 0}
   health: 100
-  moveSpeed: 3.5
-  runSpeed: 7
+  moveSpeed: 1
   hunger: 0
   fieldOfView: 120
   attackRange: 3
   watchRange: 8
+  dropItem: {fileID: 1827420617751670965, guid: 8ac2d2444ef001347ac5d9567c1f5361, type: 3}
   wanderRadius: 10
   wanderTimer: 5
 --- !u!1 &3955406351709833468

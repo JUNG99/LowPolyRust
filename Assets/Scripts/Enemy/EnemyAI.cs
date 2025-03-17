@@ -20,7 +20,6 @@ public class EnemyAI : MonoBehaviour
     // 적의 스텟
     public float health = 100f;
     public float moveSpeed = 3.5f;
-    public float runSpeed = 7f;
     public float hunger = 100f;
     public float fieldOfView = 120f; // 시야각 (도 단위)
     public float attackRange = 1f;  // 공격 사거리
@@ -43,7 +42,7 @@ public class EnemyAI : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         
-        agent.speed = moveSpeed; // 기본 이동 속도 설정
+        agent.speed = moveSpeed;
         wanderTimerCounter = wanderTimer;
 
         // 초기 상태에 따른 행동 설정
@@ -55,7 +54,7 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
-        // 자동 모드 전환 (toggle enabled via autoModeSwitch / false일 경우, currentState는 인스펙터에서 설정된 값으로 유지됨)
+        // 자동 모드 전환 
         if (autoModeSwitch)
         {
             if (target != null && IsTargetVisible())
@@ -87,7 +86,7 @@ public class EnemyAI : MonoBehaviour
         UpdateAnimation();
     }
 
-    // 랜덤 이동 동작 처리 (WonderMode)
+    // WonderMode
     void WanderUpdate()
     {
         wanderTimerCounter += Time.deltaTime;
@@ -98,7 +97,7 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    // 타겟 추적 및 공격 동작 처리 (AttackMode)
+    // AttackMode
     void AttackUpdate()
     {
         if (target == null) return;
@@ -112,7 +111,7 @@ public class EnemyAI : MonoBehaviour
         }
         else
         {
-            // 공격 사거리 외에 있으면 타겟을 향해 이동 (추적)
+            agent.speed = CalculateSpeed(distance, watchRange);
             agent.SetDestination(target.position);
         }
     }
@@ -124,8 +123,13 @@ public class EnemyAI : MonoBehaviour
         {
             Debug.Log("Enemy Attacks! Target takes damage.");
             animator.SetTrigger("Attack");
+            
+            // PlayerStats playerStats = target.GetComponent<PlayerStats>();
+            // if (playerStats != null)
+            // {
+            //     playerStats.TakeDamage(10f);
+            // }
         }
-        // >> 타겟의 HP를 감소시키는 로직을 추가 <<
     }
     
     // 적이 타겟한테 데미지 받기
@@ -183,6 +187,8 @@ public class EnemyAI : MonoBehaviour
     void SetNewDestination()
     {
         Vector3 newDestination = RandomNavSphere(transform.position, wanderRadius, -1);
+        float distance = Vector3.Distance(transform.position, newDestination);
+        agent.speed = CalculateSpeed(distance, wanderRadius);
         agent.SetDestination(newDestination);
     }
 
@@ -196,15 +202,31 @@ public class EnemyAI : MonoBehaviour
         return navHit.position;
     }
     
+    // 이동 거리에 따른 속도
+    float CalculateSpeed(float distance, float maxDistance)
+    {
+        // t: 현재 남은 거리를 정규화 (0: 도착, 1: 시작)
+        float t = Mathf.Clamp01(distance / maxDistance);
+        // multiplier: t가 0 또는 1일 때 0.8, t가 0.5일 때 1.0 (즉, 앞뒤로 20% 낮게, 중간은 기준 속도)
+        float multiplier = Mathf.Lerp(0.8f, 1f, 1f - Mathf.Abs(t - 0.5f) * 2f);
+        // baseSpeed: 선형 보간으로 moveSpeed에서 moveSpeed * 2까지 결정
+        float baseSpeed = Mathf.Lerp(moveSpeed, moveSpeed * 2f, t);
+        return baseSpeed * multiplier;
+    }
+    
     void UpdateAnimation()
     {
         if (animator == null || agent == null)
+        {
             return;
-    
-        // NavMeshAgent의 속도를 이용해 현재 이동 중인지 확인
+        }
+        
         float currentSpeed = agent.velocity.magnitude;
-    
-        // 이동 속도가 약간이라도 있다면(예: 0.1f 이상이면) 걷는 모션, 그렇지 않으면 Idle 모션
+        // 최대 이동 속도는 moveSpeed * 2, 정규화된 값(0~1)을 WalkScale에 할당
+        float normalizedSpeed = Mathf.Clamp01(currentSpeed / (moveSpeed * 2f));
+        animator.SetFloat("WalkScale", normalizedSpeed);
+        
+        // Move 파라미터: 속도가 0.1 이상이면 1 (이동 모션), 아니면 0 (Idle)
         if (currentSpeed > 0.1f)
         {
             animator.SetFloat("Move", 1f);

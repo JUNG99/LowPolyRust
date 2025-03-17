@@ -333,10 +333,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Horse_001
       objectReference: {fileID: 0}
-    - target: {fileID: 3851015956068934394, guid: dfb23d60f30c46847ba7815aa09e2567, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
     - target: {fileID: 4483999970917742656, guid: dfb23d60f30c46847ba7815aa09e2567, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -381,10 +377,6 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 1088936824}
-    - target: {fileID: 5715469279851176533, guid: dfb23d60f30c46847ba7815aa09e2567, type: 3}
-      propertyPath: dropItem
-      value: 
-      objectReference: {fileID: 1827420617751670965, guid: 8ac2d2444ef001347ac5d9567c1f5361, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1127,7 +1119,6 @@ MonoBehaviour:
   target: {fileID: 1088936824}
   health: 100
   moveSpeed: 3.5
-  runSpeed: 7
   hunger: 0
   fieldOfView: 120
   attackRange: 3
