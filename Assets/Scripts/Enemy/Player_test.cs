@@ -1,45 +1,45 @@
-//using System.Collections;
-//using UnityEngine;
+using System.Collections;
+using UnityEngine;
 
-//public class Player : MonoBehaviour
-//{
-//    [Header("Player Settings")]
-//    public float moveSpeed = 5f;
+public class Player : MonoBehaviour
+{
+    [Header("Player Settings")]
+    public float moveSpeed = 5f;
 
-//    [Header("Ground Check")]
-//    private bool isGrounded;
+    [Header("Ground Check")]
+    private bool isGrounded;
 
-//    private Rigidbody rigidbody;
+    private Rigidbody rigidbody;
 
-//    void Start()
-//    {
-//        rigidbody = GetComponent<Rigidbody>();
-//    }
+    void Start()
+    {
+        rigidbody = new Rigidbody();
+    }
 
-//    void Update()
-//    {
-//        Move();
-//    }
-    
-//    void Move()
-//    {
-//        float moveX = Input.GetAxis("Horizontal");
-//        float moveZ = Input.GetAxis("Vertical");
-//        Vector3 moveDir = transform.right * moveX + transform.forward * moveZ;
-//        transform.position += moveDir * moveSpeed * Time.deltaTime;
-//    }
+    void Update()
+    {
+        Move();
+    }
 
-//    // ?åÎ†à?¥Ïñ¥Í∞Ä ?ÅÍ≥º Ï∂©Îèå ???ÅÏóêÍ≤??∞Î?ÏßÄÎ•??ÖÌûà??Î°úÏßÅ Ï∂îÍ?
-//    void OnCollisionEnter(Collision collision)
-//    {
-//        if (collision.gameObject.CompareTag("Enemy"))
-//        {
-//            EnemyAI enemy = collision.gameObject.GetComponent<EnemyAI>();
-//            if (enemy != null)
-//            {
-//                enemy.TakeDamage(10f);
-//                Debug.Log("Hit enemy, applied 10 damage.");
-//            }
-//        }
-//    }
-//}
+    void Move()
+    {
+        float moveX = Input.GetAxis("Horizontal");
+        float moveZ = Input.GetAxis("Vertical");
+        Vector3 moveDir = transform.right * moveX + transform.forward * moveZ;
+        transform.position += moveDir * moveSpeed * Time.deltaTime;
+    }
+
+    // ?åÎ†à?¥Ïñ¥Í∞Ä ?ÅÍ≥º Ï∂©Îèå ???ÅÏóêÍ≤??∞Î?ÏßÄÎ•??ÖÌûà??Î°úÏßÅ Ï∂îÍ?
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            EnemyAI enemy = collision.gameObject.GetComponent<EnemyAI>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(10f);
+                Debug.Log("Hit enemy, applied 10 damage.");
+            }
+        }
+    }
+}

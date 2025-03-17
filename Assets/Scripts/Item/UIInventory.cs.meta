@@ -3,7 +3,12 @@ guid: 8726f0379da71db40ae80600858b9a0a
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - inventoryWindow: {fileID: 517838201752608358, guid: e800e423cf801e74686e1d0950626e41, type: 3}
+  - slotPanel: {fileID: 3368781450849969364, guid: f2886eb9c1f47b9498584b2545b78928, type: 3}
+  - selectedItemName: {instanceID: 0}
+  - selectedItemDescription: {instanceID: 0}
+  - DiscardButton: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
