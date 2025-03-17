@@ -24,7 +24,7 @@ public class PlayerCombat : MonoBehaviour
         Vector3 rayStartPosition = transform.position + Vector3.up * 1.5f;
 
         // Raycast로 공격 범위 내의 물체를 탐지
-        if (Physics.Raycast(transform.position, transform.forward, out hit, attackRange, interactableLayer))
+        if (Physics.Raycast(rayStartPosition,transform.position, out hit, attackRange, interactableLayer))
         {
             // 적과의 상호작용
             EnemyAI enemy = hit.collider.GetComponent<EnemyAI>();
