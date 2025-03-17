@@ -16,24 +16,20 @@ public class PlayerCombat : MonoBehaviour
 
     void Attack()
     {
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, attackRange, interactableLayer))
+        void Attack()
         {
-            // IInteractable 인터페이스가 있는 오브젝트라면 실행
-            IInteractable interactable = hit.collider.GetComponent<IInteractable>();
-            if (interactable != null)
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, transform.forward, out hit, attackRange))
             {
-                //interactable.Interact();
-                return;
+                EnemyAI enemy = hit.collider.GetComponent<EnemyAI>();
+                if (enemy != null)
+                {
+                    enemy.TakeDamage(10f);  // 적 체력 감소
+                }
             }
-
-            // 적을 공격하는 경우
-            //Enemy enemy = hit.collider.GetComponent<Enemy>();
-            //if (enemy != null)
-            //{
-            //    enemy.TakeDamage(attackDamage);
-            //    Debug.Log($"{enemy.gameObject.name} 에게 {attackDamage} 데미지를 줌!");
-            //}
         }
+
     }
+
+
 }
