@@ -24,7 +24,8 @@ public class EnemyAI : MonoBehaviour
     public float fieldOfView = 120f; // 시야각 (도 단위)
     public float attackRange = 3f;  // 공격 사거리
     public float watchRange = 10f;  // 주시 사거리 (외부 반경)
-
+    public float attackDamage = 10f;
+    
     // 적 이동 반경과 재설정 시간
     public float wanderRadius = 10f;
     public float wanderTimer = 5f;
@@ -140,14 +141,15 @@ public class EnemyAI : MonoBehaviour
     {
         if (target != null)
         {
-            Debug.Log("Enemy Attacks! Target takes damage.");
             animator.SetTrigger("Attack");
             
-            // PlayerStats playerStats = target.GetComponent<PlayerStats>();
-            // if (playerStats != null)
-            // {
-            //     playerStats.TakeDamage(10f);
-            // }
+            PlayerStats playerStats = target.GetComponent<PlayerStats>();
+            if (playerStats != null)
+            {
+                playerStats.TakeDamage(attackDamage);
+            }
+            
+            Debug.Log($"Enemy Attacks! {attackDamage} damage .");
         }
     }
     
@@ -155,7 +157,7 @@ public class EnemyAI : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
-        Debug.Log("Enemy took " + damage + " damage. Health: " + health);
+        Debug.Log($"Enemy took damage. Enemy Health: {health}");
         if (health <= 0)
         {
             Die();
