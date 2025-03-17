@@ -14,7 +14,7 @@ public class PlayerCombat : MonoBehaviour
     {
         
         
-        if (Input.GetMouseButtonDown(0) && !buildScript.BuildMode)
+        if (Input.GetMouseButtonDown(0) && !buildScript.buildMode)
         {
             Attack();
         }
