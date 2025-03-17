@@ -591,13 +591,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1663877177}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48a189d01266bc241999ef6909c3b897, type: 3}
+  m_Script: {fileID: 11500000, guid: 57d5b5b2aec4bf340a39e1e5fa9a1964, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  matter:
-  - {fileID: 5743507171032473749, guid: 6e936bb8ac208324f9e75d4498004e24, type: 3}
-  - {fileID: 3797691637664374256, guid: 4ee07bf98258e92419539a64f2a4d7a6, type: 3}
-  - {fileID: 3797691637664374256, guid: be6ab7b259c637b4491acfb490720fd8, type: 3}
   index: 0
   _gridSize: 0.1
   onBuild: 0

@@ -61,30 +61,30 @@ public class Build : MonoBehaviour
     {
         if (_previewObj != null)
         {
-            // 크기 변동 처리
-            if (Input.GetKey(KeyCode.Alpha3))
-            {
-                _scroll = Input.GetAxis("Mouse ScrollWheel");
-                _previewObj.transform.localScale += new Vector3(1, 0, 0) * _scroll;
-                _isChangeObj = true;
-            }
-            if (Input.GetKey(KeyCode.Alpha2))
-            {
-                _scroll = Input.GetAxis("Mouse ScrollWheel");
-                _previewObj.transform.localScale += new Vector3(0, 1, 0) * _scroll;
-                _isChangeObj = true;
-            }
-            if (Input.GetKey(KeyCode.Alpha1))
-            {
-                _scroll = Input.GetAxis("Mouse ScrollWheel");
-                _previewObj.transform.localScale += new Vector3(0, 0, 1) * _scroll;
-                _isChangeObj = true;
-            }
-            if (Input.GetKey(KeyCode.Alpha4))
-            {
-                _previewObj.transform.localScale = matter[index].transform.localScale;
-                _isChangeObj = true;
-            }
+            //// 크기 변동 처리
+            //if (Input.GetKey(KeyCode.Alpha3))
+            //{
+            //    _scroll = Input.GetAxis("Mouse ScrollWheel");
+            //    _previewObj.transform.localScale += new Vector3(1, 0, 0) * _scroll;
+            //    _isChangeObj = true;
+            //}
+            //if (Input.GetKey(KeyCode.Alpha2))
+            //{
+            //    _scroll = Input.GetAxis("Mouse ScrollWheel");
+            //    _previewObj.transform.localScale += new Vector3(0, 1, 0) * _scroll;
+            //    _isChangeObj = true;
+            //}
+            //if (Input.GetKey(KeyCode.Alpha1))
+            //{
+            //    _scroll = Input.GetAxis("Mouse ScrollWheel");
+            //    _previewObj.transform.localScale += new Vector3(0, 0, 1) * _scroll;
+            //    _isChangeObj = true;
+            //}
+            //if (Input.GetKey(KeyCode.Alpha4))
+            //{
+            //    _previewObj.transform.localScale = matter[index].transform.localScale;
+            //    _isChangeObj = true;
+            //}
             // 회전 변동 처리
             if (Input.GetKeyDown(KeyCode.R))
             {
