@@ -2583,10 +2583,9 @@ GameObject:
   - component: {fileID: 629865680}
   - component: {fileID: 629865679}
   - component: {fileID: 629865678}
-  - component: {fileID: 629865677}
   - component: {fileID: 629865676}
   - component: {fileID: 629865675}
-  - component: {fileID: 629865684}
+  - component: {fileID: 629865685}
   m_Layer: 0
   m_Name: testPlayer
   m_TagString: Untagged
@@ -2629,22 +2628,6 @@ MonoBehaviour:
   hungerDecreaseRate: 1
   thirstDecreaseRate: 1.5
   hpDecreaseRate: 5
---- !u!114 &629865677
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 629865674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a52a6381b6ca80499b2a32405cae454, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactionRange: 2
-  interactableLayer:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!114 &629865678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2780,7 +2763,7 @@ Transform:
   - {fileID: 1897043189}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &629865684
+--- !u!114 &629865685
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2789,9 +2772,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 629865674}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c6d3c4a6c484e84cafec165c81e39b4, type: 3}
+  m_Script: {fileID: 11500000, guid: 0e65cd7babe16c049a396b4c4ba72ea7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickupRange: 3
+  playerCamera: {fileID: 1897043191}
 --- !u!1 &649536789
 GameObject:
   m_ObjectHideFlags: 0
@@ -9558,6 +9543,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Item_Workbench
       objectReference: {fileID: 0}
+    - target: {fileID: 4857691994788031404, guid: 66f30f0462489274fb1b29ffcd35a867, type: 3}
+      propertyPath: m_Layer
+      value: 28
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9574,6 +9563,10 @@ PrefabInstance:
     - target: {fileID: 1237453942473652010, guid: 696d07e92b9041b4aa50eae0ab31c5a7, type: 3}
       propertyPath: m_Name
       value: Item_leather
+      objectReference: {fileID: 0}
+    - target: {fileID: 1237453942473652010, guid: 696d07e92b9041b4aa50eae0ab31c5a7, type: 3}
+      propertyPath: m_Layer
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 6025373993332055627, guid: 696d07e92b9041b4aa50eae0ab31c5a7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9672,6 +9665,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Item_IronPickAxe
       objectReference: {fileID: 0}
+    - target: {fileID: 6907174225736189572, guid: 6cc460d20006e4e46a41ab167073f8ad, type: 3}
+      propertyPath: m_Layer
+      value: 28
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9693,6 +9690,10 @@ PrefabInstance:
     - target: {fileID: 2829803584514613679, guid: f2feb483d9a015f49b031c41f8630826, type: 3}
       propertyPath: m_Name
       value: Item_IronHammer
+      objectReference: {fileID: 0}
+    - target: {fileID: 2829803584514613679, guid: f2feb483d9a015f49b031c41f8630826, type: 3}
+      propertyPath: m_Layer
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 5851926841557686807, guid: f2feb483d9a015f49b031c41f8630826, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9791,6 +9792,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Item_CopperHammer
       objectReference: {fileID: 0}
+    - target: {fileID: 6136903990305618771, guid: eccb558c328fcca4cbcbbab05bf522bc, type: 3}
+      propertyPath: m_Layer
+      value: 28
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9870,6 +9875,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Item_GoldAxe
       objectReference: {fileID: 0}
+    - target: {fileID: 1281302762008883054, guid: abd9c36d57011c648b03f21e8fd38af5, type: 3}
+      propertyPath: m_Layer
+      value: 28
+      objectReference: {fileID: 0}
     - target: {fileID: 1786305743450715982, guid: abd9c36d57011c648b03f21e8fd38af5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.5
@@ -9926,6 +9935,10 @@ PrefabInstance:
     - target: {fileID: 7300572288004046664, guid: e8bf500f7e3648f408fa554558654088, type: 3}
       propertyPath: m_Name
       value: Item_IronAxe
+      objectReference: {fileID: 0}
+    - target: {fileID: 7300572288004046664, guid: e8bf500f7e3648f408fa554558654088, type: 3}
+      propertyPath: m_Layer
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 8402813375888434591, guid: e8bf500f7e3648f408fa554558654088, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10024,6 +10037,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Item_Orange
       objectReference: {fileID: 0}
+    - target: {fileID: 4218442964751236821, guid: 2531f6d7ee6c76340822e6ae54bfe514, type: 3}
+      propertyPath: m_Layer
+      value: 28
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10103,6 +10120,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Item_CopperAxe
       objectReference: {fileID: 0}
+    - target: {fileID: 3128047477797756987, guid: 60796d6a67bfa4d4680f5ca6eebd69a7, type: 3}
+      propertyPath: m_Layer
+      value: 28
+      objectReference: {fileID: 0}
     - target: {fileID: 7830762475968222549, guid: 60796d6a67bfa4d4680f5ca6eebd69a7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.5
@@ -10159,6 +10180,10 @@ PrefabInstance:
     - target: {fileID: 1666735714117171908, guid: f14a3f8655fd83f42a7b0f0398699016, type: 3}
       propertyPath: m_Name
       value: Item_GoldHammer
+      objectReference: {fileID: 0}
+    - target: {fileID: 1666735714117171908, guid: f14a3f8655fd83f42a7b0f0398699016, type: 3}
+      propertyPath: m_Layer
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 3658293487577859034, guid: f14a3f8655fd83f42a7b0f0398699016, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10257,6 +10282,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Item_StoneHammer
       objectReference: {fileID: 0}
+    - target: {fileID: 3805950705750483825, guid: 4f7f590d353173f408ce3a4a2e02c719, type: 3}
+      propertyPath: m_Layer
+      value: 28
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10313,6 +10342,10 @@ PrefabInstance:
     - target: {fileID: 6776739255013034186, guid: 11954d471c61c4e4bbbce6682a127c7f, type: 3}
       propertyPath: m_Name
       value: Item_Wood
+      objectReference: {fileID: 0}
+    - target: {fileID: 6776739255013034186, guid: 11954d471c61c4e4bbbce6682a127c7f, type: 3}
+      propertyPath: m_Layer
+      value: 28
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10388,6 +10421,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Item_GoldPickAxe
       objectReference: {fileID: 0}
+    - target: {fileID: 6996989024867855659, guid: dade2bd39087a0440a4edf0dc424f290, type: 3}
+      propertyPath: m_Layer
+      value: 28
+      objectReference: {fileID: 0}
     - target: {fileID: 7660437000628909735, guid: dade2bd39087a0440a4edf0dc424f290, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.5
@@ -10454,6 +10491,10 @@ PrefabInstance:
     - target: {fileID: 1459509178525289568, guid: e9e0fc3f00c489948ad06f0a9107b707, type: 3}
       propertyPath: m_Name
       value: Item_StoneAxe
+      objectReference: {fileID: 0}
+    - target: {fileID: 1459509178525289568, guid: e9e0fc3f00c489948ad06f0a9107b707, type: 3}
+      propertyPath: m_Layer
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 7599506211587059126, guid: e9e0fc3f00c489948ad06f0a9107b707, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10556,6 +10597,10 @@ PrefabInstance:
     - target: {fileID: 8816103828828794268, guid: acc19dbe9896bf7429dc814dc87dc08a, type: 3}
       propertyPath: m_Name
       value: Item_Rock
+      objectReference: {fileID: 0}
+    - target: {fileID: 8816103828828794268, guid: acc19dbe9896bf7429dc814dc87dc08a, type: 3}
+      propertyPath: m_Layer
+      value: 28
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10692,6 +10737,10 @@ PrefabInstance:
     - target: {fileID: 4922906983117557377, guid: 2d73a81afc7e33a449fc27f6d16309ee, type: 3}
       propertyPath: m_Name
       value: Item_Pan
+      objectReference: {fileID: 0}
+    - target: {fileID: 4922906983117557377, guid: 2d73a81afc7e33a449fc27f6d16309ee, type: 3}
+      propertyPath: m_Layer
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 5442744965628566777, guid: 2d73a81afc7e33a449fc27f6d16309ee, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10846,6 +10895,10 @@ PrefabInstance:
     - target: {fileID: 7000168559600009590, guid: d536b78bb7674be47b6b400c5e45d505, type: 3}
       propertyPath: m_Name
       value: Item_StonePickAxe
+      objectReference: {fileID: 0}
+    - target: {fileID: 7000168559600009590, guid: d536b78bb7674be47b6b400c5e45d505, type: 3}
+      propertyPath: m_Layer
+      value: 28
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11136,6 +11189,10 @@ PrefabInstance:
     - target: {fileID: 3265084446679818407, guid: 43cb9116712bfd744a397c3a69cb7139, type: 3}
       propertyPath: m_Name
       value: Item_CopperPickAxe
+      objectReference: {fileID: 0}
+    - target: {fileID: 3265084446679818407, guid: 43cb9116712bfd744a397c3a69cb7139, type: 3}
+      propertyPath: m_Layer
+      value: 28
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

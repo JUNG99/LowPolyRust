@@ -17,11 +17,16 @@ public class PlayerController : MonoBehaviour
     private float mouseSensitivity = 2f;
     private float xRotation = 0f;
 
+    private UIInventory inventory; // 🔥 인벤토리 참조 추가
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked; // 마우스 잠금
         moveSpeed = walkSpeed; // 기본 이동 속도 설정
+
+        // 🔥 UIInventory 찾기
+        inventory = FindObjectOfType<UIInventory>();
     }
 
     void Update()
@@ -30,6 +35,7 @@ public class PlayerController : MonoBehaviour
         Jump();
         Crouch();
         LookAround();
+        ToggleInventory(); // 🔥 I 키 입력 체크
     }
 
     void MovePlayer()
@@ -104,5 +110,13 @@ public class PlayerController : MonoBehaviour
 
         cameraHolder.localRotation = Quaternion.Euler(xRotation, 0f, 0f); //MainCamera 회전
         transform.Rotate(Vector3.up * mouseX);
+    }
+
+    void ToggleInventory()
+    {
+        if (Input.GetKeyDown(KeyCode.I) && inventory != null)
+        {
+            inventory.Toggle();
+        }
     }
 }
