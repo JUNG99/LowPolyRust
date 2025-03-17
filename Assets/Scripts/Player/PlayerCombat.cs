@@ -16,6 +16,12 @@ public class PlayerCombat : MonoBehaviour
         {
             Attack();
         }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            
+        }
+                
+        
     }
 
     void Attack()
@@ -42,6 +48,8 @@ public class PlayerCombat : MonoBehaviour
                 }
             }
         }
+
+        Debug.DrawRay(rayStartPosition, transform.forward * attackRange, Color.red, 0.1f);
     }
 
   
