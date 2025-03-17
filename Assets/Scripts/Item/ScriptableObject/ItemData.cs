@@ -7,7 +7,7 @@ using UnityEngine;
 public enum ItemType
 {
     Equipable,
-    food,
+    Consumable,
     Resource,
 }
 

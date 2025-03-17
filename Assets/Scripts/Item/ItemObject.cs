@@ -10,7 +10,7 @@ public interface IInteractable
 }
 
 
-public class ItemObject : MonoBehaviour
+public class ItemObject : MonoBehaviour, IInteractable
 {
     public ItemData data;
 
@@ -22,7 +22,7 @@ public class ItemObject : MonoBehaviour
 
     public void OnInteract()
     {
-        // CharaterManager ±¸Çö
+        // CharaterManager?
     }
 
 }

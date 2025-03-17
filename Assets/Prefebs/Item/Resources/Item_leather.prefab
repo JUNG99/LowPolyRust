@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 6025373993332055627}
   - component: {fileID: 7835848092250479048}
   - component: {fileID: 4958554741847785683}
+  - component: {fileID: 4456964522472774684}
   - component: {fileID: 4268883522725289220}
   - component: {fileID: 72951234836301865}
-  - component: {fileID: 4456964522472774684}
   m_Layer: 0
   m_Name: Item_leather
   m_TagString: Untagged
@@ -86,6 +86,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &4456964522472774684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1237453942473652010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 325979ce417db8344945d3c56ef770fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 0}
 --- !u!64 &4268883522725289220
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -135,16 +148,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &4456964522472774684
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1237453942473652010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 325979ce417db8344945d3c56ef770fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data: {fileID: 0}
