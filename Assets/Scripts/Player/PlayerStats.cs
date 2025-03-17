@@ -43,10 +43,26 @@ public class PlayerStats : MonoBehaviour
         {
             currentHP -= hpDecreaseRate;
         }
-
+        
         UpdateUI();
     }
 
+    public void TakeDamage(float damage)
+    {
+        currentHP -= damage;
+        if (currentHP <= 0)
+        {
+            currentHP = 0;
+            Die(); // 체력이 0 이하가 되면 죽음 처리
+        }
+        UpdateUI(); // 체력 UI 업데이트
+    }
+
+    private void Die()
+    {
+        // 죽었을 때 처리
+        Debug.Log("Player died");
+    }
     private void UpdateUI()
     {
         UIManager.Instance.UpdateHP(currentHP, maxHP);

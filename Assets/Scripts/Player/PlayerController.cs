@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     private float moveSpeed;
     private bool isCrouching = false;
 
-    public Transform cameraHolder;  // 🔥 MainCamera를 여기 연결
+    public Transform cameraHolder;  // MainCamera를 여기 연결
     private float mouseSensitivity = 2f;
     private float xRotation = 0f;
 
