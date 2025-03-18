@@ -54,6 +54,23 @@ public class EnemyAI : MonoBehaviour
             SetNewDestination();
         }
     }
+    
+    void OnEnable()
+    {
+        if (target == null)
+        {
+            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+            if (playerObj != null)
+            {
+                target = playerObj.transform;
+                Debug.Log("Player target assigned in OnEnable: " + target.name);
+            }
+            else
+            {
+                Debug.LogWarning("Player not found in OnEnable.");
+            }
+        }
+    }
 
     void Update()
     {
@@ -78,12 +95,12 @@ public class EnemyAI : MonoBehaviour
         if (currentState == AIState.AttackMode)
         {
             AttackUpdate();
-            Debug.Log("Attacking");
+            Debug.Log("Enemy Attack Mode");
         }
         else if (currentState == AIState.WonderMode)
         {
             WanderUpdate();
-            //Debug.Log("Wandering");
+            Debug.Log("Enemy Wander Mode");
         }
         
         UpdateAnimation();
@@ -126,7 +143,7 @@ public class EnemyAI : MonoBehaviour
         if (distance <= attackRange)
         {
             agent.ResetPath();
-            Attack();
+            animator.SetTrigger("Attack");
         }
         else
         {
@@ -136,20 +153,18 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    // 적이 타겟한테 데미지 주기
+    // 적이 타겟한테 데미지 주기 (애니메이션으로 실행 가능)
     void Attack()
     {
         if (target != null)
         {
-            animator.SetTrigger("Attack");
-            
             PlayerStats playerStats = target.GetComponent<PlayerStats>();
             if (playerStats != null)
             {
-                // playerStats.TakeDamage(attackDamage);
+                playerStats.TakeDamage(attackDamage);
             }
             
-            Debug.Log($"Enemy Attacks! {attackDamage} damage .");
+            Debug.Log($"Enemy Attacks! {attackDamage} damage.");
         }
     }
     
