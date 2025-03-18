@@ -10,6 +10,8 @@ public class EnemyRespawnManager : MonoBehaviour
     public int maxEnemyCount = 10;   // 최대 리젠 수
     public float spawnRange = 2f;    // 각 스폰 포인트 주변의 스폰 범위 (반경)
 
+    public Transform parentTransform;
+    
     void Start()
     {
         StartCoroutine(RespawnRoutine());
@@ -44,7 +46,7 @@ public class EnemyRespawnManager : MonoBehaviour
                     // 스폰 포인트 내에서 랜덤한 위치를 구합니다.
                     Vector3 randomOffset = Random.insideUnitSphere * spawnRange;
                     randomOffset.y = 0f; // 높이 보정
-                    Instantiate(enemyPrefab, spawnPoint.position + randomOffset, spawnPoint.rotation);
+                    GameObject spawnedEnemy = Instantiate (enemyPrefab, spawnPoint.position + randomOffset, spawnPoint.rotation, parentTransform);
                 }
             }
         }
