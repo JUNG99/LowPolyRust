@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using System;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -35,6 +36,8 @@ public class EnemyAI : MonoBehaviour
     
     // 적의 드랍 아이템
     public GameObject dropItem;
+    
+    public event Action OnAttack;
 
     // 참조
     private NavMeshAgent agent;
@@ -114,7 +117,7 @@ public class EnemyAI : MonoBehaviour
         {
             SetNewDestination();
             wanderTimerCounter = 0;
-            wanderTimer = Random.Range(minWanderTime, maxWanderTime);
+            wanderTimer = UnityEngine.Random.Range(minWanderTime, maxWanderTime);
         }
     }
 
@@ -165,6 +168,8 @@ public class EnemyAI : MonoBehaviour
             }
             
             Debug.Log($"Enemy Attacks! {attackDamage} damage.");
+            
+            OnAttack?.Invoke();
         }
     }
     
@@ -231,7 +236,7 @@ public class EnemyAI : MonoBehaviour
     // NavMesh 위에서 랜덤한 위치를 샘플링하는 함수
     public static Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask)
     {
-        Vector3 randDirection = Random.insideUnitSphere * dist;
+        Vector3 randDirection = UnityEngine.Random.insideUnitSphere * dist;
         randDirection += origin;
         NavMeshHit navHit;
         NavMesh.SamplePosition(randDirection, out navHit, dist, layermask);
