@@ -20,17 +20,14 @@ public class NaturalObject : MonoBehaviour
     // 플레이어가 Raycast해서 GetComponent로 사용할 함수
     public void HarvesstNatureObject()
     {
+        // 나무,풀,돌 내구도 한개 줄이기
         durability -= 1;
 
-        // 나무,풀,돌 내구도 한개 줄이기
-        if (durability > 0)
-        {
-            // ##TODO : 아이템 획득 로직 작성 필요
-            
-            return;
-        }
+        // 아이템 드랍 하는 방식으로 변경 
+        Instantiate(naturalObjectData.ItemPrefab, transform.position, Quaternion.identity);
+
         // duration (내구도)를 다 쓰면 
-        else 
+        if(durability <= 0)
         {
             // 오브젝트 삭제 
             // 오브젝트 부모
