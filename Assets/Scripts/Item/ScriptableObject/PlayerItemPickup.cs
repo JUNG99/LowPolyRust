@@ -6,6 +6,11 @@ public class PlayerItemPickup : MonoBehaviour
     public float pickupRange = 3f; // 아이템을 감지할 거리
     public Camera playerCamera; // 플레이어의 카메라
     private UIInventory inventory;
+
+    private void Start()
+    {
+        inventory = FindObjectOfType<UIInventory>();
+    }
     void Update()
     {
         // Ray를 시각적으로 계속 표시
@@ -27,14 +32,30 @@ public class PlayerItemPickup : MonoBehaviour
             if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Item"))
             {
                 PickupItem(hit.collider.gameObject);
+
             }
         }
     }
 
     void PickupItem(GameObject item)
     {
-        Debug.Log($"{item.name} 아이템을 획득했습니다!");
-        // item을 UIInventory.cs에 존재하는 slots에 순차적으로 추가하는 코드 구현
-        Destroy(item);
+        ItemData data = item.GetComponent<ItemDataHolder>()?.itemData; // ItemDataHolder에서 가져오기
+        if (data == null)
+        {
+            Debug.LogWarning($"{item.name}에 ItemData가 없습니다!");
+            return;
+        }
+
+        bool added = inventory.AddItem(data); // 인벤토리에 아이템 추가
+        if (added)
+        {
+            Debug.Log($"{data.displayName}을(를) 획득했습니다!");
+            Destroy(item); // 성공적으로 추가되면 아이템 삭제
+        }
+        else
+        {
+            Debug.LogWarning("인벤토리가 가득 찼습니다!");
+        }
     }
 }
+

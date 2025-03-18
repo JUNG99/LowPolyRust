@@ -61,19 +61,35 @@ public class UIInventory : MonoBehaviour
         return inventoryWindow.activeInHierarchy;
     }
 
-    // 아이템을 인벤토리 슬롯에 추가하는 메서드
-    //public void AddItem(GameObject item)
-    //{
-    //    foreach (var slot in slots)
-    //    {
-    //        if (slot.IsEmpty()) // 빈 슬롯 찾기
-    //        {
-    //            slot.SetItem(item); // 슬롯에 아이템 추가
-    //            Debug.Log($"{item.name}이(가) 인벤토리에 추가되었습니다.");
-    //            return;
-    //        }
-    //    }
+    public bool AddItem(ItemData newItem, int amount = 1)
+    {
+        // 1. 같은 아이템이 있고, 스택 가능하면 추가
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].item != null && slots[i].item == newItem && newItem.canStack)
+            {
+                slots[i].item = newItem;  // ItemData 설정
+                slots[i].quantity = amount;  // 개수 설정
+                Debug.Log($"{newItem.displayName}의 개수가 {slots[i].quantity}개로 증가했습니다!");
+                return true;
+            }
+        }
 
-    //    Debug.Log("인벤토리가 가득 찼습니다!");
-    //}
+        // 2. 빈 슬롯을 찾아 새 아이템 추가
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].item == null)
+            {
+                slots[i].item = newItem;
+                slots[i].quantity = amount;
+                Debug.Log($"{newItem.displayName}을(를) 인벤토리에 추가했습니다! 개수: {amount}");
+                return true;
+            }
+        }
+
+        // 3. 빈 슬롯이 없을 경우 실패 반환
+        Debug.LogWarning("인벤토리가 가득 찼습니다!");
+        return false;
+    }
+
 }

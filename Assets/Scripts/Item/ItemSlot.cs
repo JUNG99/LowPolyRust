@@ -17,6 +17,7 @@ public class ItemSlot : MonoBehaviour
         return storedItem == null;
     }
 
+
     public void SetItem(GameObject item)
     {
         storedItem = item;
