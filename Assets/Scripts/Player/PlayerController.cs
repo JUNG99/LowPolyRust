@@ -36,6 +36,8 @@ public class PlayerController : MonoBehaviour
 
         // UIInventory 찾기
         inventory = FindObjectOfType<UIInventory>();
+
+        cameraHolder.localPosition += new Vector3(0f, 0f, 0.5f);
     }
 
     void Update()
