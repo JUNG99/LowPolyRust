@@ -70,7 +70,7 @@ public class UIInventory : MonoBehaviour
             {
                 slots[i].item = newItem;  // ItemData 설정
                 slots[i].quantity = amount;  // 개수 설정
-                Debug.Log($"{newItem.displayName}의 개수가 {slots[i].quantity}개로 증가했습니다!");
+                Debug.Log($"{newItem.displayName} : {slots[i].quantity}개.");
                 return true;
             }
         }
@@ -82,13 +82,13 @@ public class UIInventory : MonoBehaviour
             {
                 slots[i].item = newItem;
                 slots[i].quantity = amount;
-                Debug.Log($"{newItem.displayName}을(를) 인벤토리에 추가했습니다! 개수: {amount}");
+                Debug.Log($"{newItem.displayName}인벤토리에 추가.");
                 return true;
             }
         }
 
         // 3. 빈 슬롯이 없을 경우 실패 반환
-        Debug.LogWarning("인벤토리가 가득 찼습니다!");
+        Debug.LogWarning("인벤토리가 가득 참");
         return false;
     }
 

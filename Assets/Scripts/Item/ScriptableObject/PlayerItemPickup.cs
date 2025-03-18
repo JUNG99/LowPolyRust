@@ -39,7 +39,7 @@ public class PlayerItemPickup : MonoBehaviour
 
     void PickupItem(GameObject item)
     {
-        ItemData data = item.GetComponent<ItemDataHolder>()?.itemData; // ItemDataHolder에서 가져오기
+        ItemData data = item.GetComponent<ItemObject>()?.itemdata; 
         if (data == null)
         {
             Debug.LogWarning($"{item.name}에 ItemData가 없습니다!");
