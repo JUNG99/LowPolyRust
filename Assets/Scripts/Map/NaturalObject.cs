@@ -24,7 +24,7 @@ public class NaturalObject : MonoBehaviour
         durability -= 1;
 
         // 아이템 드랍 하는 방식으로 변경 
-        Instantiate(naturalObjectData.ItemPrefab, transform.position, Quaternion.identity);
+        Instantiate(naturalObjectData.ItemPrefab, transform.position + new Vector3(0,1f,0), Quaternion.identity);
 
         // duration (내구도)를 다 쓰면 
         if(durability <= 0)
