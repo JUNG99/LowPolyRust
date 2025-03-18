@@ -146,7 +146,7 @@ public class EnemyAI : MonoBehaviour
             PlayerStats playerStats = target.GetComponent<PlayerStats>();
             if (playerStats != null)
             {
-                // playerStats.TakeDamage(attackDamage);
+                playerStats.TakeDamage(attackDamage);
             }
             
             Debug.Log($"Enemy Attacks! {attackDamage} damage .");
