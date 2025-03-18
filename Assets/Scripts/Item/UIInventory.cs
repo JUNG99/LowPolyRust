@@ -20,6 +20,7 @@ public class UIInventory : MonoBehaviour
     void Start()
     {
         inventoryWindow.SetActive(false);
+        
 
         // 슬롯 초기화
         slots = new ItemSlot[slotPanel.childCount];
@@ -72,9 +73,8 @@ public class UIInventory : MonoBehaviour
             if (slots[i].item != null && slots[i].item == newItem)
             {
                 slots[i].quantity += 1;  // 수량을 1 증가시킴
-                UpdateInvetoryUI();
                 Debug.Log($"{newItem.displayName} : {slots[i].quantity}개.");
-
+                UpdateInvetoryUI();
                 return true;
             }
         }
@@ -86,9 +86,8 @@ public class UIInventory : MonoBehaviour
             {
                 slots[i].item = newItem;
                 slots[i].quantity = 1;  // 새 아이템을 1개로 설정
-                UpdateInvetoryUI();
                 Debug.Log($"{newItem.displayName} 인벤토리에 추가.");
-
+                UpdateInvetoryUI();
                 return true;
             }
         }
@@ -113,15 +112,15 @@ public class UIInventory : MonoBehaviour
             }
         }
     }
-    public void SelectItem(int index)
-    {
-        if (slots[index].item == null) return;
+    //public void SelectItem(int index)
+    //{
+    //    if (slots[index].item == null) return;
 
-        selectedItem = slots[index];
-        selectedItemIndex = index;
+    //    selectedItem = slots[index];
+    //    selectedItemIndex = index;
 
-        selectedItemName.text = selectedItem.item.displayName;
-        selectedItemDescription.text = selectedItem.item.description;
-    }
+    //    selectedItemName.text = selectedItem.item.displayName;
+    //    selectedItemDescription.text = selectedItem.item.description;
+    //}
 
 }
