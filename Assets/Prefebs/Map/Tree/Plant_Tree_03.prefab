@@ -70,6 +70,7 @@ GameObject:
   - component: {fileID: 2150855458275569570}
   - component: {fileID: 1906860350365878568}
   - component: {fileID: 2884564563870499466}
+  - component: {fileID: 8154825946764475155}
   m_Layer: 27
   m_Name: Tree_03_LOD0
   m_TagString: Untagged
@@ -176,6 +177,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   naturalObjectData: {fileID: 11400000, guid: 5fd54848e9163ad4e9dcffd8df7a699b, type: 2}
+  durability: 0
+--- !u!208 &8154825946764475155
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4966799755173285633}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.8900001, y: 2.4750001, z: 1.567}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.101, y: 2.476, z: -0.12100001}
+  m_TimeToStationary: 0.5
 --- !u!1 &7793063030294508304
 GameObject:
   m_ObjectHideFlags: 0

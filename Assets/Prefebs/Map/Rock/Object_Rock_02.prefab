@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 8527071543909017392}
   - component: {fileID: 2043125063517426584}
   - component: {fileID: 6757083575574046553}
+  - component: {fileID: 2630262207659664554}
   m_Layer: 27
   m_Name: Rock_05
   m_TagString: Untagged
@@ -153,3 +154,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   naturalObjectData: {fileID: 11400000, guid: eb84b687556ee594cb8c414842c466bc, type: 2}
   durability: 0
+--- !u!208 &2630262207659664554
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7090917133295827243}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.465, y: 0.97300005, z: 1.0960001}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.102000006, y: 0.036000002, z: 0.08400001}
+  m_TimeToStationary: 0.5

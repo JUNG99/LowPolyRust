@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1081015097637460128}
   - component: {fileID: 3172223618326024668}
   - component: {fileID: 2391372502643499270}
+  - component: {fileID: 6851254343492503461}
   m_Layer: 27
   m_Name: Grass_02_LOD0
   m_TagString: Untagged
@@ -119,6 +120,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   naturalObjectData: {fileID: 11400000, guid: df8a8a07c32fa1e418038e295c2b36b6, type: 2}
+  durability: 0
+--- !u!208 &6851254343492503461
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2189746345723226538}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.085, y: 0.09900001, z: 0.096}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.098000005, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &3965218905699963651
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3708414543227472323}
   - component: {fileID: 722786214506868675}
   - component: {fileID: 8980780916795727258}
+  - component: {fileID: 8287193012258151149}
   m_Layer: 27
   m_Name: Bush_03_LOD0
   m_TagString: Untagged
@@ -119,6 +120,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   naturalObjectData: {fileID: 11400000, guid: df8a8a07c32fa1e418038e295c2b36b6, type: 2}
+  durability: 0
+--- !u!208 &8287193012258151149
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 142396895790627492}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.75100005, y: 0.25800002, z: 0.757}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.078, y: 0.238, z: -0.142}
+  m_TimeToStationary: 0.5
 --- !u!1 &316064435211125622
 GameObject:
   m_ObjectHideFlags: 0

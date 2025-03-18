@@ -153,6 +153,7 @@ GameObject:
   - component: {fileID: 1741290839377895933}
   - component: {fileID: 7258741284033610462}
   - component: {fileID: 5684203325119033299}
+  - component: {fileID: 7430211084249899944}
   m_Layer: 27
   m_Name: Flowers_01_LOD0
   m_TagString: Untagged
@@ -259,3 +260,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   naturalObjectData: {fileID: 11400000, guid: df8a8a07c32fa1e418038e295c2b36b6, type: 2}
+  durability: 0
+--- !u!208 &7430211084249899944
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5795945714160664230}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.156, y: 0.19100001, z: 0.15900001}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.027, y: 0.18200001, z: -0.028}
+  m_TimeToStationary: 0.5
