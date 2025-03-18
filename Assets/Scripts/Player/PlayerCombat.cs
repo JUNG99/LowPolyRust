@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
@@ -11,17 +12,18 @@ public class PlayerCombat : MonoBehaviour
 
     private void Start()
     {
+
         buildScript = FindAnyObjectByType<Build>();
     }
+    void Update()
+    {
 
-        void Update()
-        {
-
-
+        
             if (Input.GetMouseButtonDown(0) && !buildScript.buildMode)
             {
                 Attack();
             }
+ 
 
 
 

@@ -1,18 +1,21 @@
 using System;
 using TMPro;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class UIInventory : MonoBehaviour
 {
     public ItemSlot[] slots;
+
     public GameObject inventoryWindow;
     public GameObject Aim;
     public Transform slotPanel;
 
     [Header("Selected Item")]
+    private ItemSlot selectedItem;
+    private int selectedItemIndex;
     public TextMeshProUGUI selectedItemName;
     public TextMeshProUGUI selectedItemDescription;
-    public GameObject DiscardButton;
 
     void Start()
     {
@@ -35,7 +38,7 @@ public class UIInventory : MonoBehaviour
     {
         selectedItemName.text = string.Empty;
         selectedItemDescription.text = string.Empty;
-        DiscardButton.SetActive(false);
+      
     }
 
     public void Toggle()
@@ -63,26 +66,29 @@ public class UIInventory : MonoBehaviour
 
     public bool AddItem(ItemData newItem, int amount = 1)
     {
-        // 1. 같은 아이템이 있고, 스택 가능하면 추가
+        // 1. 같은 아이템이 있고, 스택 가능하면 수량을 증가시킴
         for (int i = 0; i < slots.Length; i++)
         {
-            if (slots[i].item != null && slots[i].item == newItem && newItem.canStack)
+            if (slots[i].item != null && slots[i].item == newItem)
             {
-                slots[i].item = newItem;  // ItemData 설정
-                slots[i].quantity = amount;  // 개수 설정
+                slots[i].quantity += 1;  // 수량을 1 증가시킴
+                UpdateInvetoryUI();
                 Debug.Log($"{newItem.displayName} : {slots[i].quantity}개.");
+
                 return true;
             }
         }
 
-        // 2. 빈 슬롯을 찾아 새 아이템 추가
+        // 2. 같은 아이템이 없으면 빈 슬롯을 찾아 새 아이템 추가
         for (int i = 0; i < slots.Length; i++)
         {
             if (slots[i].item == null)
             {
                 slots[i].item = newItem;
-                slots[i].quantity = amount;
-                Debug.Log($"{newItem.displayName}인벤토리에 추가.");
+                slots[i].quantity = 1;  // 새 아이템을 1개로 설정
+                UpdateInvetoryUI();
+                Debug.Log($"{newItem.displayName} 인벤토리에 추가.");
+
                 return true;
             }
         }
@@ -90,6 +96,32 @@ public class UIInventory : MonoBehaviour
         // 3. 빈 슬롯이 없을 경우 실패 반환
         Debug.LogWarning("인벤토리가 가득 참");
         return false;
+    }
+
+
+    public void UpdateInvetoryUI()
+    {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].item != null)
+            {
+                slots[i].Set();
+            }
+            else
+            {
+                slots[i].Clear();
+            }
+        }
+    }
+    public void SelectItem(int index)
+    {
+        if (slots[index].item == null) return;
+
+        selectedItem = slots[index];
+        selectedItemIndex = index;
+
+        selectedItemName.text = selectedItem.item.displayName;
+        selectedItemDescription.text = selectedItem.item.description;
     }
 
 }

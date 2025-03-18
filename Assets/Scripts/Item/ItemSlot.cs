@@ -1,26 +1,41 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class ItemSlot : MonoBehaviour
 {
     public ItemData item;
 
-    public GameObject storedItem;
-
     public UIInventory inventory;
+    public Button button;
+    public Image icon;
+    public TextMeshProUGUI quatityText;
+
     public bool equipped;
     public int quantity;
-
     public int index;
-    public bool IsEmpty()
+
+    public void Start()
     {
-        return storedItem == null;
+        icon.gameObject.SetActive(false);
+    }
+    public void Set()
+    {
+        icon.gameObject.SetActive(true);
+        icon.sprite = item.icon;
+        quatityText.text = quantity > 1 ? quantity.ToString() : string.Empty;
     }
 
-
-    public void SetItem(GameObject item)
+    public void Clear()
     {
-        storedItem = item;
+        item = null;
+        icon.gameObject.SetActive(false);
+        quatityText.text = string.Empty;
     }
 
+    public void OnClickButton()
+    {
+        inventory.SelectItem(index);
+    }
 }
