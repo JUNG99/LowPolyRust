@@ -13,12 +13,12 @@ public class NatureObjectData : ScriptableObject
     private string natureToolTip;
     [SerializeField]
     private int durability;
-
-    // 아이템 획득 관련해서는 추후 추가 
+    [SerializeField]
+    private GameObject itemPrefab;
 
     public PlantType PlantType { get => plantType;}
     public int Durability { get => durability;}
     public string NatureName { get => natureName; }
     public string NatureToolTip { get => natureToolTip; }
-
+    public GameObject ItemPrefab { get => itemPrefab; }
 }

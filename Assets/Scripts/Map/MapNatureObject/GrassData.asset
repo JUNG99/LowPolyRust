@@ -16,3 +16,4 @@ MonoBehaviour:
   natureName: "\uD480"
   natureToolTip: "\uD480\uC744 \uD68D\uB4DD\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
   durability: 1
+  itemPrefab: {fileID: 4218442964751236821, guid: 2531f6d7ee6c76340822e6ae54bfe514, type: 3}
