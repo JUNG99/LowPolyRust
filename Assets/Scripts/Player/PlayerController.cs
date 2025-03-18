@@ -17,19 +17,39 @@ public class PlayerController : MonoBehaviour
     private float mouseSensitivity = 2f;
     private float xRotation = 0f;
 
+    public UIInventory inventory; // 🔥 인벤토리 참조 추가
+
+    // 카메라 회전 제어 변수
+    private bool canLook = true;
+
+    // 플레이어 이동 제어 변수
+    private bool canMove = true;
+
+    // UI의 Aim 객체 참조
+    public GameObject Aim;  // 인스펙터에서 Aim을 UI 이미지로 연결
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked; // 마우스 잠금
         moveSpeed = walkSpeed; // 기본 이동 속도 설정
+
+        // UIInventory 찾기
+        inventory = FindObjectOfType<UIInventory>();
     }
 
     void Update()
     {
-        MovePlayer();
-        Jump();
-        Crouch();
-        LookAround();
+        if (canMove) // canMove가 true일 때만 이동
+        {
+            MovePlayer();
+            Jump();
+            Crouch();
+        }
+
+        if (canLook) LookAround();  // canLook이 true일 때만 LookAround 실행
+
+        ToggleInventory();
     }
 
     void MovePlayer()
@@ -104,5 +124,18 @@ public class PlayerController : MonoBehaviour
 
         cameraHolder.localRotation = Quaternion.Euler(xRotation, 0f, 0f); //MainCamera 회전
         transform.Rotate(Vector3.up * mouseX);
+    }
+
+    void ToggleInventory()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            inventory.Toggle();
+
+            // 인벤토리 창이 열리면 카메라 회전 막고, 닫히면 회전 허용
+            canLook = !inventory.IsOpen();
+            canMove = !inventory.IsOpen();
+        }
+
     }
 }

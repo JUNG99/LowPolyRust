@@ -10,19 +10,19 @@ public interface IInteractable
 }
 
 
-public class ItemObject : MonoBehaviour
+public class ItemObject : MonoBehaviour, IInteractable
 {
-    public ItemData data;
+    public ItemData itemdata;
 
     public string GetInteractPrompt()
     {
-        string str = $"{data.displayName}\n{data.description}";
+        string str = $"{itemdata.displayName}\n{itemdata.description}";
         return str;
     }
 
     public void OnInteract()
     {
-        // CharaterManager ±¸Çö
+        Destroy(gameObject);
     }
 
 }

@@ -1,18 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
 
 public class ItemSlot : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public ItemData item;
+
+    public GameObject storedItem;
+
+    public UIInventory inventory;
+    public bool equipped;
+    public int quantity;
+
+    public int index;
+    public bool IsEmpty()
     {
-        
+        return storedItem == null;
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public void SetItem(GameObject item)
     {
-        
+        storedItem = item;
     }
+
 }
