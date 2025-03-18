@@ -1680,19 +1680,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3446579734398874014, guid: 9aae83bac5164684b855e4fdcd84ab27, type: 3}
       propertyPath: jumpForce
-      value: 5
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3446579734398874014, guid: 9aae83bac5164684b855e4fdcd84ab27, type: 3}
       propertyPath: walkSpeed
-      value: 50
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3446579734398874014, guid: 9aae83bac5164684b855e4fdcd84ab27, type: 3}
       propertyPath: crouchSpeed
-      value: 30
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3446579734398874014, guid: 9aae83bac5164684b855e4fdcd84ab27, type: 3}
       propertyPath: sprintSpeed
-      value: 100
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3446579734398874014, guid: 9aae83bac5164684b855e4fdcd84ab27, type: 3}
       propertyPath: cameraHolder
