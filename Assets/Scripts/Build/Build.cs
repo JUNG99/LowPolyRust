@@ -7,6 +7,10 @@ using UnityEngine.UIElements;
 
 public class Build : MonoBehaviour
 {
+    [SerializeField] BuildMakeRoof buildMakeRoof;
+    [SerializeField] SetRenderTrans renderTrans;
+    [SerializeField] BuildCriteria buildCriteria;
+
     private GameObject[] matter;
     [SerializeField] private int index = 0;
     private Material _matterMaterial;
@@ -21,13 +25,12 @@ public class Build : MonoBehaviour
 
     public bool onBuild = false;
     public bool onCollision; // 부딫치고 있는지 확인
-    private float _collisionSize;
     public bool buildCondition; // 파츠 조건
 
-    private Quaternion rotate = Quaternion.identity; 
+    private Quaternion rotate = Quaternion.identity;
     private Quaternion roofRotate = Quaternion.identity;
 
-    private float _scroll;
+    //private float _scroll;
 
     public bool buildMode = false;
 
@@ -35,32 +38,44 @@ public class Build : MonoBehaviour
 
     private void Start()
     {
+        buildMakeRoof = GetComponent<BuildMakeRoof>();
+        renderTrans = GetComponent<SetRenderTrans>();
+        buildCriteria = GetComponent<BuildCriteria>();
+
         matter = Resources.LoadAll<GameObject>("Build");
         matter = matter.OrderBy(x => ExtractNumber(x.name)).ThenBy(x => x.name).ToArray();
     }
 
     private void Update()
     {
+        changeMode();
         if ((buildMode))
         {
             OnPreview();
             if (onBuild)
             {
                 Preview();
-                CollisionCheck();
+                onCollision = buildCriteria.CollisionCheck(_previewObj);
                 OnBuild();
                 UpdateObj();
             }
-            MakeRoof();
+            buildMakeRoof.MakeRoof();
         }
     }
     // 정렬을 위해 숫자 분리
     int ExtractNumber(string name)
     {
-        Match match  = Regex.Match(name, @"\d+");
+        Match match = Regex.Match(name, @"\d+");
         return match.Success ? int.Parse(match.Value) : int.MaxValue;
     }
 
+    void changeMode()
+    {
+        if (Input.GetKeyUp(KeyCode.P))
+        {
+            buildMode = !buildMode;
+        }
+    }
     void UpdateObj()
     {
         if (_previewObj != null)
@@ -116,31 +131,6 @@ public class Build : MonoBehaviour
                 _isChangeObj = true;
             }
 
-        }
-    }
-
-    //테스트용
-    void MakeRoof()
-    {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Physics.Raycast(ray, out RaycastHit hit, 15f, LayerMask.GetMask("Build"));
-            if (hit.collider != null)
-            {
-                if (!hit.collider.gameObject.CompareTag("Floor")) return;
-                List<GameObject> list = GetConnectedFloorTile(hit.collider.gameObject);
-                //GameObject wall = GetMaxWallHeight(GetConnectedWalls(hit.collider.gameObject));
-                //Vector3 height = new Vector3();
-
-                //테스트1
-                foreach (GameObject obj in list)
-                {
-
-                    GameObject instance = Instantiate(obj, obj.transform.position + Vector3.up * 6f, Quaternion.identity);
-                    instance.tag = "Roof";
-                }
-            }
         }
     }
 
@@ -220,160 +210,27 @@ public class Build : MonoBehaviour
                 _buildPos = new Vector3(Mathf.Round(hit.point.x / _gridSize) * _gridSize, Mathf.Round(hit.point.y / _gridSize) * _gridSize, Mathf.Round(hit.point.z / _gridSize) * _gridSize);
             }
 
-            buildCondition = BuildCondition(hit.collider);
+            buildCondition = buildCriteria.BuildCondition(_previewObj, hit.collider);
 
         }
         _previewObj.transform.position = _buildPos;
         _matterMaterial.color = onCollision && buildCondition ? new Color(0, 0, 1, 0.2f) : new Color(1f, 0, 0, 0.2f);
     }
 
-    bool BuildCondition(Collider hitCollider)
+    void PreviewSet()
     {
-        if (_previewObj.CompareTag("Floor"))
+        if (_previewObj != null)
+            Destroy(_previewObj);
+        onBuild = true;
+        _previewObj = Instantiate(matter[index]);
+        _previewObj.layer = LayerMask.NameToLayer("Preview");
+        _matterMaterial = _previewObj.GetComponent<Renderer>().material;
+        renderTrans.SetTransparent(_matterMaterial);
+        _collider = _previewObj.GetComponent<Collider>();
+        if (_collider != null)
         {
-            return true;  // 바닥은 항상 가능
+            _collider.isTrigger = true;
         }
-
-        if (hitCollider.CompareTag(_previewObj.tag))
-        {
-            return true;  // 같은 종류끼리는 가능
-        }
-        if (hitCollider.CompareTag("Floor") && _previewObj.CompareTag("Wall"))
-        {
-            return true;  // 벽은 바닥에서 가능
-        }
-
-        if (hitCollider.CompareTag("Wall") && _previewObj.CompareTag("Roof"))
-        {
-            return true;  // 지붕은 벽에서 가능
-        }
-
-        return false;  // 그 외의 경우는 불가능
-    }
-    // 오브젝트와 부딫치고 Floor태그를 가진 오브젝트 탐색
-    List<GameObject> GetNeighbors(GameObject obj)
-    {
-        HashSet<GameObject> neighbors = new();
-        Collider col = obj.GetComponent<Collider>();
-        if (col != null)
-        {
-            Collider[] collider = Physics.OverlapBox(col.bounds.center, col.bounds.extents, Quaternion.identity, LayerMask.GetMask("Build"));
-            for (int i = 0; i < collider.Length; i++)
-            {
-                if (collider[i].gameObject.CompareTag("Floor") && collider[i].gameObject != obj)
-                    neighbors.Add(collider[i].gameObject);
-            }
-        }
-        return neighbors.ToList();
-    }
-    // 오브젝트와 연결된 모든 Floor태그를 가진 오브젝트 탐색
-    List<GameObject> GetConnectedFloorTile(GameObject startFloor)
-    {
-        HashSet<GameObject> connectFloor = new();
-        Queue<GameObject> queue = new();
-        queue.Enqueue(startFloor);
-
-        while (queue.Count > 0)
-        {
-            GameObject floor = queue.Dequeue();
-            if (!connectFloor.Contains(floor))
-            {
-                connectFloor.Add(floor);
-                foreach (var obj in GetNeighbors(floor))
-                {
-                    if (!connectFloor.Contains(obj))
-                    {
-                        queue.Enqueue(obj);
-                    }
-                }
-            }
-        }
-        return connectFloor.ToList();
-    }
-
-    // 오브젝트와 연결된 모든 Floor태그를 가진 오브젝트에서 벽과 충돌하였을 경우 벽을 저장
-    List<GameObject> GetConnectedWalls(GameObject startFloor)
-    {
-        List<GameObject> connectedFloors = GetConnectedFloorTile(startFloor);
-        HashSet<GameObject> connectedWalls = new();
-
-        foreach (GameObject floor in connectedFloors)
-        {
-            Collider[] colliders = Physics.OverlapBox(floor.transform.position, floor.GetComponent<Collider>().bounds.extents, Quaternion.identity, LayerMask.GetMask("Build"));
-            foreach (Collider col in colliders)
-            {
-                if (col.gameObject.CompareTag("Wall"))
-                {
-                    connectedWalls.Add(col.gameObject);
-                }
-            }
-        }
-        return connectedWalls.ToList();
-    }
-    // 가장 높이 있는 벽
-    GameObject GetMaxWallHeight(List<GameObject> walls)
-    {
-        GameObject highWall = null;
-        float maxHeight = 0f;
-        foreach (GameObject wall in walls)
-        {
-            Ray ray = new Ray(wall.transform.position, Vector3.up);
-            RaycastHit[] hits = Physics.RaycastAll(ray, 100, LayerMask.GetMask("Floor"));
-
-            float fathesHeight = hits.Max(h =>h.distance);
-
-            if(fathesHeight > maxHeight)
-            {
-                maxHeight = fathesHeight;
-                highWall = wall;
-            }
-        }
-        return highWall;
-    }
-
-    void CollisionCheck()
-    {
-        Collider[] colliders = Physics.OverlapBox(_collider.bounds.center, _collider.bounds.extents * _collisionSize);
-        colliders = colliders.Where(collider => collider.gameObject != _previewObj).ToArray();
-
-        if (_previewObj.CompareTag("Floor"))
-        {
-            _collisionSize = 0.9999f;
-            colliders = colliders.Where(collider => !(collider.gameObject.layer == LayerMask.NameToLayer("Ground"))).ToArray();
-        }
-        else if (_previewObj.CompareTag("Wall"))
-        {
-            _collisionSize = 0.8f;
-            colliders = colliders.Where(collider => !(collider.CompareTag("Floor") || collider.CompareTag("Wall") || (collider.CompareTag("Roof")))).ToArray();
-        }
-        else if (_previewObj.CompareTag("Roof"))
-        {
-            _collisionSize = 0.9999f;
-            colliders = colliders.Where(collider => !collider.CompareTag("Wall")).ToArray();
-        }
-        for (int i = 0; i < colliders.Length; i++)
-        {
-            Debug.Log(colliders[i].gameObject.name);
-        }
-        if (colliders.Length == 0)
-            onCollision = true;
-        else
-            onCollision = false;
-    }
-
-    public void SetTransparent(Material targetMaterial)
-    {
-        if (targetMaterial == null) return;
-
-        targetMaterial.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
-        targetMaterial.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-        targetMaterial.SetInt("_ZWrite", 0);
-        targetMaterial.SetFloat("_Mode", 3);
-        targetMaterial.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
-
-        targetMaterial.EnableKeyword("_ALPHABLEND_ON");
-        targetMaterial.DisableKeyword("_ALPHATEST_ON");
-        targetMaterial.DisableKeyword("_ALPHAPREMULTIPLY_ON");
     }
 
     void OnPreview()
@@ -383,21 +240,7 @@ public class Build : MonoBehaviour
             PreviewSet();
         }
     }
-    void PreviewSet()
-    {
-        if (_previewObj != null)
-            Destroy(_previewObj);
-        onBuild = true;
-        _previewObj = Instantiate(matter[index]);
-        _previewObj.layer = LayerMask.NameToLayer("Preview");
-        _matterMaterial = _previewObj.GetComponent<Renderer>().material;
-        SetTransparent(_matterMaterial);
-        _collider = _previewObj.GetComponent<Collider>();
-        if (_collider != null)
-        {
-            _collider.isTrigger = true;
-        }
-    }
+
     void OnBuild()
     {
         if (Input.GetMouseButtonDown(1) && onBuild)

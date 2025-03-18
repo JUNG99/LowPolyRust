@@ -501,6 +501,9 @@ GameObject:
   - component: {fileID: 1663877179}
   - component: {fileID: 1663877178}
   - component: {fileID: 1663877181}
+  - component: {fileID: 1663877182}
+  - component: {fileID: 1663877184}
+  - component: {fileID: 1663877183}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -594,11 +597,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57d5b5b2aec4bf340a39e1e5fa9a1964, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buildMakeRoof: {fileID: 1663877182}
+  renderTrans: {fileID: 0}
+  buildCriteria: {fileID: 0}
   index: 0
   _gridSize: 0.1
   onBuild: 0
   onCollision: 0
   buildCondition: 0
+  buildMode: 0
+--- !u!114 &1663877182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1663877177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c91bd57f52a9b2b4480a658bb70791d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1663877183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1663877177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 880e9c74ad52d1643b36e32a4a5a9212, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1663877184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1663877177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38c64d365ccae794ea6e00350f3ac9ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1785561984
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -725,6 +768,10 @@ PrefabInstance:
     - target: {fileID: 612092886322675352, guid: 9aae83bac5164684b855e4fdcd84ab27, type: 3}
       propertyPath: attackRange
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1190446543911161885, guid: 9aae83bac5164684b855e4fdcd84ab27, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3446579734398874014, guid: 9aae83bac5164684b855e4fdcd84ab27, type: 3}
       propertyPath: jumpForce
