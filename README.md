@@ -47,10 +47,11 @@
 <summary>
   PlayerController
 </summary>
-   using UnityEngine;
 
-public class PlayerController : MonoBehaviour
-{
+public class PlayerController : MonoBehaviour 
+
+
+
     public float walkSpeed = 5f;
     public float sprintSpeed = 10f;
     public float jumpForce = 5f;
@@ -170,7 +171,7 @@ public class PlayerController : MonoBehaviour
         cameraHolder.localRotation = Quaternion.Euler(xRotation, 0f, 0f); //MainCamera 회전
         transform.Rotate(Vector3.up * mouseX);
     }
-}
+
 
 </details>
 
@@ -179,10 +180,9 @@ public class PlayerController : MonoBehaviour
 <summary>
   PlayerStats
 </summary>
-   using UnityEngine;
-
 public class PlayerStats : MonoBehaviour
-{
+
+
     public float maxHP = 100f;
     public float maxHunger = 100f;
     public float maxThirst = 100f;
@@ -250,7 +250,7 @@ public class PlayerStats : MonoBehaviour
         UIManager.Instance.UpdateHunger(currentHunger, maxHunger);
         UIManager.Instance.UpdateThirst(currentThirst, maxThirst);
     }
-}
+
 
 </details>
 
