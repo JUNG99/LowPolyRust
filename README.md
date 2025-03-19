@@ -259,11 +259,11 @@ public class PlayerStats : MonoBehaviour
 
 ### 적
 <br>
-- Enemy AI 기능
-    - 행동을 Attack Mode, Wonder Mode 로 나뉨. 타겟과의 사거리에 따라 자동 변경됨.
-    - NavMeshAgent 를 통해 자동 이동.
-- Enemy 리스폰 기능
-    - 지정한 수의 Enemy가 추가한 SpawnPoint에 랜덤 생성됨.
+ - Enemy AI 기능
+   - 행동을 Attack Mode, Wonder Mode 로 나뉨. 타겟과의 사거리에 따라 자동 변경됨.
+   - NavMeshAgent 를 통해 자동 이동.
+ - Enemy 리스폰 기능
+   - 지정한 수의 Enemy가 추가한 SpawnPoint에 랜덤 생성됨.
 <br>
 ### 빌딩
 
