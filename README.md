@@ -19,8 +19,8 @@
 - `Unity 2022.3.17f`
 
 ### 🖥️시연 영상
-[Youtubue]()
-<br>(https://www.youtube.com/watch?v=6BjTQC2YuKI)
+[Youtubue](https://www.youtube.com/watch?v=6BjTQC2YuKI)
+<br>
 ### 🖥️빌드 파일
 <br>
 
