@@ -36,3 +36,15 @@
 #### 아이템/인벤토리
 
 #### 맵 
+ - 청크 별로 나무/돌/풀 생성
+ - 나무 7분, 돌 5분, 풀 3분 마다 리젠
+<br>
+
+![Image](https://github.com/user-attachments/assets/0bbe8020-2e4b-444c-85a6-57f5da14c6b3)
+<br>
+<span style='background-color:#dcffe4'> 초록색 기즈모 (나무) , 파랑색 기즈모 (돌) / 노랑색 기즈모 (풀) 로 청크를 생성 </span>
+<br>
+ - 자세한 코드 / 설명은 하위 블로그 참고 ! 
+   - [[개발일지] 청크별로 맵 오브젝트 생성](https://youcheachae.tistory.com/58)
+ - 트러블 슈팅은 하위 블로그 참고 ! 
+   - [[Unity] RaycastHit의 point와 trasform.position의 차이](https://youcheachae.tistory.com/59)
