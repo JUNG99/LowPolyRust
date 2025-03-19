@@ -20,7 +20,7 @@
 
 ### 🖥️시연 영상
 [Youtubue]()
-<br>
+<br>(https://www.youtube.com/watch?v=6BjTQC2YuKI)
 ### 🖥️빌드 파일
 <br>
 
