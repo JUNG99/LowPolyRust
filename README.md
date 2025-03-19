@@ -265,7 +265,7 @@ public class PlayerStats : MonoBehaviour
 ### 빌딩
 - Build : 건물의 파츠를 배치하고, 각 파츠의 미리보기, 배치, 회전, 크기 조정 등을 처리하는 역할을 합니다.
 - BuildMakeRoof : 건물을 구성하는 타일들의 지붕을 자동으로 생성하는 기능을 수행합니다.
-- 
+  
 ### 아이템/인벤토리
 - Item : Item의 경우, 개별적인 정보를 Item_data에 저장하여 할당을 해주며, 이를 통해 아이템 획득/인벤토리 저장의 세부 기능들과 연동이 가능합니다.
 - Inventory : Item 획득 시, Slot의 index값으로 접근하며, 순서대로 저장하게 됩니다.
