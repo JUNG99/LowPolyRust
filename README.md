@@ -42,6 +42,220 @@
 
 ---
 ### 플레이어
+-1인칭 시점 플레이어의 기본적인 움직임 (이동,점프,달리기,앉기)
+<details>
+<summary>
+  PlayerController
+</summary>
+   using UnityEngine;
+
+public class PlayerController : MonoBehaviour
+{
+    public float walkSpeed = 5f;
+    public float sprintSpeed = 10f;
+    public float jumpForce = 5f;
+    public float crouchSpeed = 2f;
+    public float crouchHeight = 0.5f;
+    public float standHeight = 1f;
+
+    private Rigidbody rb;
+    private float moveSpeed;
+    private bool isCrouching = false;
+
+    public Transform cameraHolder;  // MainCamera를 여기 연결
+    private float mouseSensitivity = 2f;
+    private float xRotation = 0f;
+
+    // 카메라 회전 제어 변수
+    private bool canLook = true;
+
+    // 플레이어 이동 제어 변수
+    private bool canMove = true;
+
+    // UI의 Aim 객체 참조
+    public GameObject Aim;  // 인스펙터에서 Aim을 UI 이미지로 연결
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+        Cursor.lockState = CursorLockMode.Locked; // 마우스 잠금
+        moveSpeed = walkSpeed; // 기본 이동 속도 설정
+        cameraHolder.localPosition += new Vector3(0f, 0f, 0.5f);
+    }
+
+    void Update()
+    {
+        if (canMove) // canMove가 true일 때만 이동
+        {
+            MovePlayer();
+            Jump();
+            Crouch();
+        }
+
+        if (canLook) LookAround();  // canLook이 true일 때만 LookAround 실행
+
+        ToggleInventory();
+    }
+
+    void MovePlayer()
+    {
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+
+        Vector3 moveDirection = transform.right * horizontal + transform.forward * vertical;
+
+        if (Input.GetKey(KeyCode.LeftShift) && !isCrouching)
+        {
+            moveSpeed = sprintSpeed;
+        }
+        else if (isCrouching)
+        {
+            moveSpeed = crouchSpeed;
+        }
+        else
+        {
+            moveSpeed = walkSpeed;
+        }
+
+        rb.MovePosition(transform.position + moveDirection.normalized * moveSpeed * Time.deltaTime);
+    }
+
+    void Jump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && Mathf.Abs(rb.velocity.y) < 0.01f)
+        {
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        }
+    }
+
+    void Crouch()
+    {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            if (isCrouching)
+            {
+                StandUp();
+            }
+            else
+            {
+                CrouchDown();
+            }
+        }
+    }
+
+    void CrouchDown()
+    {
+        isCrouching = true;
+        transform.localScale = new Vector3(transform.localScale.x, crouchHeight, transform.localScale.z);
+        cameraHolder.localPosition = new Vector3(cameraHolder.localPosition.x, crouchHeight, cameraHolder.localPosition.z);
+        Debug.Log("앉기 완료");
+    }
+
+    void StandUp()
+    {
+        isCrouching = false;
+        transform.localScale = new Vector3(transform.localScale.x, standHeight, transform.localScale.z);
+        cameraHolder.localPosition = new Vector3(cameraHolder.localPosition.x, standHeight, cameraHolder.localPosition.z);
+        Debug.Log("서기 완료");
+    }
+
+    void LookAround()
+    {
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
+
+        xRotation -= mouseY;
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+
+        cameraHolder.localRotation = Quaternion.Euler(xRotation, 0f, 0f); //MainCamera 회전
+        transform.Rotate(Vector3.up * mouseX);
+    }
+}
+
+</details>
+
+-플레이어의 상태(Hp,배고픔,수분 등)에 따른 UI 업데이트
+<details>
+<summary>
+  PlayerStats
+</summary>
+   using UnityEngine;
+
+public class PlayerStats : MonoBehaviour
+{
+    public float maxHP = 100f;
+    public float maxHunger = 100f;
+    public float maxThirst = 100f;
+
+    private float currentHP;
+    private float currentHunger;
+    private float currentThirst;
+
+    public float hungerDecreaseRate = 1f;
+    public float thirstDecreaseRate = 1.5f;
+    public float hpDecreaseRate = 5f;
+
+    private void Start()
+    {
+        currentHP = maxHP;
+        currentHunger = maxHunger;
+        currentThirst = maxThirst;
+
+        UpdateUI();
+
+        InvokeRepeating(nameof(DecreaseStatsOverTime), 1f, 1f);
+    }
+
+    private void DecreaseStatsOverTime()
+    {
+        if (currentHunger > 0)
+        {
+            currentHunger -= hungerDecreaseRate;
+        }
+        else
+        {
+            if (currentThirst > 0)
+            {
+                currentThirst -= thirstDecreaseRate;
+            }
+        }
+
+        if (currentThirst <= 0 && currentHP > 0)
+        {
+            currentHP -= hpDecreaseRate;
+        }
+        
+        UpdateUI();
+    }
+
+    public void TakeDamage(float damage)
+    {
+        currentHP -= damage;
+        if (currentHP <= 0)
+        {
+            currentHP = 0;
+            Die(); // 체력이 0 이하가 되면 죽음 처리
+        }
+        UpdateUI(); // 체력 UI 업데이트
+    }
+
+    private void Die()
+    {
+        // 죽었을 때 처리
+        Debug.Log("Player died");
+    }
+    private void UpdateUI()
+    {
+        UIManager.Instance.UpdateHP(currentHP, maxHP);
+        UIManager.Instance.UpdateHunger(currentHunger, maxHunger);
+        UIManager.Instance.UpdateThirst(currentThirst, maxThirst);
+    }
+}
+
+</details>
+
+-플레이어가 적을 공격,아이템 획득,자원을 채집
+
 
 ### 적
 
