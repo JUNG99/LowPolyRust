@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - resources
+  - food
+  - Floor
+  - Ground
+  - Wall
+  - Roof
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -15,6 +22,7 @@ TagManager:
   - 
   - 
   - 
+  - Enemy
   - 
   - 
   - 
@@ -24,18 +32,17 @@ TagManager:
   - 
   - 
   - 
+  - Player
+  - Build
+  - Preview
   - 
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - NaturalObject
+  - Item
+  - Ground
+  - Ocean
   - 
   m_SortingLayers:
   - name: Default

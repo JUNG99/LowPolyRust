@@ -1,0 +1,117 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3121890708105913733
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6107838835051617325}
+  - component: {fileID: 9119545078507303287}
+  - component: {fileID: 4224970003212619672}
+  - component: {fileID: 4876438121236122345}
+  m_Layer: 0
+  m_Name: MapManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6107838835051617325
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3121890708105913733}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9119545078507303287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3121890708105913733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d850be5af7ac214c93d532a0944447d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planting: {fileID: 0}
+  mapWeather: {fileID: 0}
+  treeParent: {fileID: 0}
+  rockParent: {fileID: 0}
+  grassParent: {fileID: 0}
+  treeChunkParent: {fileID: 0}
+  rockChunkParent: {fileID: 0}
+  grassChunkParent: {fileID: 0}
+  treeChunks: []
+  rockChunks: []
+  grassChunks: []
+  treePrefab:
+  - {fileID: 1822718234530777653, guid: d72bcfecb2a44f54193f09ac0dfa7d4d, type: 3}
+  - {fileID: 4717023923300442384, guid: 8248a8eddbd7e0b49bc40c9b5838a451, type: 3}
+  - {fileID: 2205347302878185308, guid: fdfe0e82c135b284889ca0ec772fb6bd, type: 3}
+  - {fileID: 5507849873909001865, guid: 6036c3eea9018a54e91b42da128553a6, type: 3}
+  - {fileID: 8136672767789991339, guid: 96ae0af0e629bdd4d95bc447260c777d, type: 3}
+  rockPrefab:
+  - {fileID: 2626808342951220598, guid: aea9e279cde87b64d91e3af08e196911, type: 3}
+  - {fileID: 4399393173044903489, guid: 78583c92406e8b14188340061f5bfbe6, type: 3}
+  - {fileID: 937907090659940191, guid: 6a3e1c3eecf18204691bacfd262176fd, type: 3}
+  grassPrefab:
+  - {fileID: 2802167208141733486, guid: b6ae659219f369a4e854fd433f8955a7, type: 3}
+  - {fileID: 7841102085943531314, guid: 2b1b623fc0333a145a2bff82be441243, type: 3}
+  - {fileID: 316064435211125622, guid: 74311568035559b4f928c1bedf2a2393, type: 3}
+  - {fileID: 3605195771848777172, guid: c65c46b9e6a7402419ce1268df9b452d, type: 3}
+  - {fileID: 1380859245049619235, guid: 7289959368d7d09408800f1ff6df38c1, type: 3}
+  - {fileID: 6236539873170107843, guid: 733052af34f69ca4dbf744d831234a5b, type: 3}
+  - {fileID: 3965218905699963651, guid: d95bd4b2f84eb094a90fedd3736b32e7, type: 3}
+  mapData:
+  - {fileID: 11400000, guid: d1c45b60c89a92947ba644dc9f255fea, type: 2}
+  - {fileID: 11400000, guid: 9a3aba96bffd52a4b824b589c03de0bc, type: 2}
+  - {fileID: 11400000, guid: 19bb40ff342937145a339e7f32faf0af, type: 2}
+  weatherRotaTime: 0
+--- !u!114 &4224970003212619672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3121890708105913733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4476f6ee5673db4e932799431ba8448, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nowWeatherType: 0
+  weatherParent: {fileID: 0}
+  weatherParticle: []
+  nowWeatherParticle: {fileID: 0}
+--- !u!114 &4876438121236122345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3121890708105913733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2445e617c227c644499050e5d9ec2250, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  maxGroundHeight: 0
+  plantPrefabList: []
+  mapData: {fileID: 0}
+  plantingParent: {fileID: 0}
