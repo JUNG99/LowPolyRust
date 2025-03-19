@@ -265,7 +265,12 @@ public class PlayerStats : MonoBehaviour
 ### 빌딩
 
 ### 아이템/인벤토리
-
+- Item : Item의 경우, 개별적인 정보를 Item_data에 저장하여 할당을 해주며, 이를 통해 아이템 획득/인벤토리 저장의 세부 기능들과 연동이 가능합니다.
+- Inventory : Item 획득 시, Slot의 index값으로 접근하며, 순서대로 저장하게 됩니다.
+            1. 같은 아이템이 있고, 스택 가능하면 수량을 증가시킴
+            2. 같은 아이템이 없으면 빈 슬롯을 찾아 새 아이템 추가
+            순으로 동작하며 또한, ItemSlot.cs의 Set()과 clear()의 반복 호출로 UI를 갱신하며 icon.sprite = item.icon;를 통하여
+            Item_data에 저장되어 있는 sprite를 Item icon으로 사용하게 됩니다.
 ### 맵 
  - 청크 별로 나무/돌/풀 생성
  - 나무 7분, 돌 5분, 풀 3분 마다 리젠
