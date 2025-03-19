@@ -24,27 +24,65 @@
 ### 🖥️빌드 파일
 <br>
 
----
-
 ## 📌 주요 기능
-#### 플레이어
+[플레이어 - 바로가기](#플레이어)
+<br>
+[적 - 바로가기](#적)
+<br>
+[빌딩 - 바로가기](#빌딩)
+<br>
+[아이템/인벤토리 - 바로가기](#아이템/인벤토리)
+<br>
+[맵 - 바로가기](#맵)
+<br>
+[사운드 - 바로가기](#사운드)
+<br>
+[날씨 - 바로가기](#날씨)
+<br>
 
-#### 적
+---
+### 플레이어
 
-#### 빌딩
+### 적
 
-#### 아이템/인벤토리
+### 빌딩
 
-#### 맵 
+### 아이템/인벤토리
+
+### 맵 
  - 청크 별로 나무/돌/풀 생성
  - 나무 7분, 돌 5분, 풀 3분 마다 리젠
 <br>
 
 ![Image](https://github.com/user-attachments/assets/0bbe8020-2e4b-444c-85a6-57f5da14c6b3)
 <br>
-<span style='background-color:#dcffe4'> 초록색 기즈모 (나무) , 파랑색 기즈모 (돌) / 노랑색 기즈모 (풀) 로 청크를 생성 </span>
+##### Gizmo Colors
+- 🌳 **Green Gizmo**: 나무  
+- 🪨 **Blue Gizmo**: 돌  
+- 🌿 **Yellow Gizmo**: 풀
+
 <br>
+
  - 자세한 코드 / 설명은 하위 블로그 참고 ! 
-   - [[개발일지] 청크별로 맵 오브젝트 생성](https://youcheachae.tistory.com/58)
+    - [[개발일지] 청크별로 맵 오브젝트 생성](https://youcheachae.tistory.com/58)
  - 트러블 슈팅은 하위 블로그 참고 ! 
-   - [[Unity] RaycastHit의 point와 trasform.position의 차이](https://youcheachae.tistory.com/59)
+    - [[Unity] RaycastHit의 point와 trasform.position의 차이](https://youcheachae.tistory.com/59)
+
+### 사운드
+ - 오디오 소스를 플레이어의 맨 아래에 배치, 소리가 캐릭터의 위치에서 일관적으로 들리게 됨.
+<br>
+
+![Image](https://github.com/user-attachments/assets/ce00bc22-a823-4219-b1b4-4d17fb610f16)
+<br>
+
+ - 사운드 코드는 하위의 레포시토리 - 2.SoundManger 참고
+    - [[kimYouChae]Unity-Utility](https://github.com/kimYouChae/Unity-Utility)
+  
+### 날씨
+ - 맑은 날씨 / 눈 / 비 날씨가 반복적으로 바뀐다
+
+![Image](https://github.com/user-attachments/assets/90b0243d-7341-49ce-b349-cac7210bbcda)
+
+<br>
+
+![Image](https://github.com/user-attachments/assets/e77c4deb-3f75-4734-ae9e-c7f832fe6b29)
